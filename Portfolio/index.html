@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joshua Pinder | Computing Portfolio</title>
   <meta name="description" content="Computing portfolio of Joshua Pinder — full-stack, backend systems, and mobile development." />
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body>
+<body class="antialiased">
 <header>
   <div class="container nav">
     <div class="brand">
@@ -24,9 +25,9 @@
 </header>
 
 <main class="container">
-  <section class="hero">
+  <section class="hero motion-safe:animate-[fade-in-up_0.7s_ease-out_forwards] motion-reduce:animate-none">
     <div class="card pad">
-      <h1>Computing student focused on <span style="color: var(--accent)">full-stack</span>, backend systems & mobile apps.</h1>
+      <h1>Computing student focused on <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent font-semibold">full-stack</span>, backend systems & mobile apps.</h1>
       <p class="muted">
         I build practical software with a focus on clean architecture, security-minded decisions, and solid fundamentals.
       </p>
@@ -92,7 +93,7 @@
             <h3>Wyttle</h3>
             <div class="muted small">Group project • Full-stack mobile</div>
           </div>
-          <span class="tag">Flagship</span>
+          <span class="tag motion-safe:animate-[soft-glow_2.4s_ease-in-out_infinite_alternate] motion-reduce:animate-none">Flagship</span>
         </div>
         <div class="stack">
           <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Expo</span><span class="chip">Database</span>
