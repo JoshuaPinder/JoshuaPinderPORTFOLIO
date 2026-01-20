@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wyttle | Joshua Pinder</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <span>Joshua Pinder</span>
+      <span class="badge">Project</span>
+    </div>
+    <nav class="navlinks">
+      <a data-nav href="index.html">Home</a>
+      <a data-nav href="projects.html">Projects</a>
+      <a class="button" href="projects.html">Back</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card pad">
+    <h1>Wyttle</h1>
+    <p class="muted">Group project • Full-stack mobile mentoring + peer matching platform</p>
+
+    <div class="stack" style="margin-top: 10px;">
+      <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Expo</span>
+      <span class="chip">Auth</span><span class="chip">Database</span><span class="chip">Messaging</span>
+    </div>
+
+    <div style="margin-top: 16px;" class="notice">
+      Replace this page with your real Wyttle details once you’re ready (screenshots, your responsibilities, and key features).
+    </div>
+  </div>
+
+  <div class="sectionhead">
+    <h2>What it does</h2>
+  </div>
+
+  <div class="grid">
+    <div class="col-8">
+      <div class="card pad">
+        <p class="muted">
+          Wyttle is a cross-platform mobile app designed to connect peers-to-peers and peers-to-mentors.
+          It supports discovery, matching, secure communication, and token-based interactions to encourage engagement.
+        </p>
+
+        <h3 style="margin-top: 16px;">Key features</h3>
+        <ul class="muted">
+          <li>Role-based experience (mentor vs mentee)</li>
+          <li>Discovery and matching flows</li>
+          <li>Messaging with notifications</li>
+          <li>Token-based incentives and feedback loops</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card pad">
+        <h3>Your role</h3>
+        <p class="muted">
+          Backend Lead & Project Manager — architecture decisions, database design, integration planning, and delivery coordination.
+        </p>
+        <h3 style="margin-top: 14px;">Next add</h3>
+        <p class="muted">Screenshots, system diagram, and what you personally built.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer"><div class="container">© <span id="year"></span> Joshua Pinder</div></footer>
+<script src="assets/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

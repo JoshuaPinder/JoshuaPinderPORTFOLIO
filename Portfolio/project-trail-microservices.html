@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trail App Microservices | Joshua Pinder</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand"><span>Joshua Pinder</span><span class="badge">Project</span></div>
+    <nav class="navlinks">
+      <a data-nav href="index.html">Home</a>
+      <a data-nav href="projects.html">Projects</a>
+      <a class="button" href="projects.html">Back</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card pad">
+    <h1>Trail App Microservices</h1>
+    <p class="muted">COMP2001 • Python + SQL • Microservice architecture</p>
+
+    <div class="stack" style="margin-top: 10px;">
+      <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Service boundaries</span><span class="chip">DB-per-service</span>
+    </div>
+
+    <div class="pillrow" style="margin-top: 14px;">
+      <a class="button primary" href="https://github.com/UoP-COMP2001/cw2-microservice-implementation-JoshuaPinder" target="_blank" rel="noreferrer">GitHub Repo</a>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top: 14px;">
+    <div class="col-6">
+      <div class="card pad">
+        <h2>Overview</h2>
+        <p class="muted">
+          Implemented a set of interlinked microservices for a wellbeing trail application. Each service owned its own data model
+          and database to reduce coupling and improve maintainability.
+        </p>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card pad">
+        <h2>What I’d highlight</h2>
+        <ul class="muted">
+          <li>Service separation and responsibilities</li>
+          <li>API design decisions</li>
+          <li>SQL schema per service</li>
+          <li>Testing / evidence of communication between services</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer"><div class="container">© <span id="year"></span> Joshua Pinder</div></footer>
+<script src="assets/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
