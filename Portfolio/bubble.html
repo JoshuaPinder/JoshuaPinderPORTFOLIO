@@ -16,17 +16,20 @@
     touch-action: manipulation;
     color: #2a3e2e;
   }
-  #app { position: fixed; inset: 0; }
+  #app {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+  }
 
   /* Header bar */
   .header {
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 56px;
-    background: #29bdb1;
+    flex: 0 0 auto;
+    height: 60px;
+    background: linear-gradient(180deg, #7e3ad6, #561e9a);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 18px;
+    padding: 0 14px 0 16px;
     z-index: 8;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
   }
   .menu-btn {
     background: transparent; border: none; cursor: pointer;
@@ -41,23 +44,58 @@
   .menu-btn .bars span { top: 50%; transform: translateY(-50%); }
   .menu-btn .bars::after { bottom: 0; }
   .brand {
-    color: white; font-weight: 900; letter-spacing: 1px; font-size: 22px;
-    text-shadow: 0 2px 0 rgba(0,0,0,0.08);
+    display: flex; flex-direction: column; align-items: flex-start;
+    line-height: 0.95;
+    color: white; font-weight: 900; font-family: inherit;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.18);
   }
-  .brand .accent { color: #ffd23f; }
-  .header-spacer { width: 44px; }
+  .brand .top { font-size: 13px; letter-spacing: 2px; color: #ffffff; }
+  .brand .accent {
+    font-size: 26px; letter-spacing: 1.5px;
+    color: #84e25e;
+    -webkit-text-stroke: 1px #2c5b1a;
+    text-shadow: 0 2px 0 #2c5b1a;
+  }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .balance-bubble {
+    background: white; color: #1f2a3a;
+    padding: 7px 14px; border-radius: 18px;
+    font-weight: 900; font-size: 14px;
+    border: 2px solid #2a1248;
+  }
+  .heart-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: white; border: 2px solid #2a1248;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; padding: 0;
+  }
+  .heart-btn svg { width: 18px; height: 18px; }
 
-  #game { position: absolute; left: 0; right: 0; top: 56px; bottom: 76px; width: 100%; display: block; cursor: crosshair; }
+  /* HUD overlay (session time / session balance) */
+  .hud-overlay {
+    position: absolute;
+    left: 0; right: 0;
+    top: 60px;
+    display: flex; justify-content: space-between;
+    padding: 6px 14px;
+    pointer-events: none;
+    z-index: 4;
+    font-size: 12px; font-weight: 700;
+    color: rgba(40,30,20,0.65);
+  }
+
+  .canvas-wrap { flex: 1 1 auto; position: relative; min-height: 0; }
+  #game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
 
   /* Bottom controls bar */
   .controls {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    height: 76px;
-    background: #c08560;
-    border-top: 3px solid #97623d;
+    flex: 0 0 auto;
+    height: 80px;
+    background: linear-gradient(180deg, #7e3ad6, #561e9a);
+    border-top: 2px solid rgba(0,0,0,0.18);
     display: flex; align-items: center; justify-content: center;
-    gap: 10px;
-    padding: 0 12px;
+    gap: 8px;
+    padding: 0 10px;
     z-index: 6;
   }
   .info-pill {
@@ -67,34 +105,49 @@
     padding: 11px 18px;
     font-weight: 800;
     font-size: 14px;
-    color: #2a4f4b;
-    box-shadow: 0 2px 0 rgba(0,0,0,0.10);
-    min-width: 120px;
+    color: #38374f;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+    min-width: 130px;
     text-align: center;
     cursor: default;
     font-family: inherit;
+    line-height: 1.15;
   }
   .info-pill.clickable { cursor: pointer; }
   .info-pill .em { color: #ce4658; font-weight: 900; }
 
+  .round-timer {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: white;
+    color: #2a1248;
+    font-weight: 900; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+    flex: 0 0 auto;
+    font-family: inherit;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
   .stake-btn {
-    background: #29bdb1;
+    background: #9c47d6;
     width: 46px; height: 46px;
     border-radius: 50%;
     border: none;
     color: white;
     font-size: 26px; font-weight: 900;
-    box-shadow: 0 3px 0 rgba(0,0,0,0.18);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.28);
     cursor: pointer;
     font-family: inherit;
     line-height: 1;
     transition: transform 0.08s ease;
+    flex: 0 0 auto;
   }
-  .stake-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.18); }
+  .stake-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.28); }
   .stake-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
   .buy-btn {
-    background: #ce4658;
+    background: #d9384a;
     color: white;
     border: none;
     border-radius: 50%;
@@ -105,15 +158,30 @@
     text-align: center;
     cursor: pointer;
     font-family: inherit;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.28);
     transition: transform 0.08s ease, background 0.15s ease;
     padding: 0 4px;
+    flex: 0 0 auto;
   }
-  .buy-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+  .buy-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.28); }
   .buy-btn.holding { background: #b03847; }
   .buy-btn.disabled-state { background: #8b8b8b; cursor: default; }
 
-  .balance-pill { color: #2a4f4b; }
+  .balance-pill { color: #38374f; }
+
+  .settings-btn {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: #9c47d6;
+    border: none;
+    color: white; font-size: 22px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.28);
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .settings-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.28); }
 
   /* Win pill animation */
   .info-pill.win-flash {
@@ -181,11 +249,30 @@
   }
 
   @media (max-width: 600px) {
-    .info-pill { min-width: 90px; font-size: 12px; padding: 9px 12px; }
-    .buy-btn { width: 64px; height: 64px; font-size: 12px; }
-    .stake-btn { width: 40px; height: 40px; font-size: 22px; }
-    .brand { font-size: 18px; }
-    .controls { gap: 6px; padding: 0 6px; }
+    .info-pill { min-width: 80px; font-size: 11px; padding: 8px 10px; }
+    .buy-btn { width: 60px; height: 60px; font-size: 11px; }
+    .stake-btn, .settings-btn, .round-timer { width: 38px; height: 38px; font-size: 20px; }
+    .round-timer { font-size: 11px; }
+    .brand .accent { font-size: 22px; }
+    .brand .top { font-size: 11px; }
+    .controls { gap: 5px; padding: 0 5px; height: 70px; }
+    .header { height: 56px; }
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    .header { display: none; }
+    .controls { height: 64px; gap: 8px; }
+    .info-pill { min-width: 130px; font-size: 13px; padding: 9px 16px; }
+    .hud-overlay { top: 4px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+    .stake-btn, .settings-btn, .round-timer { width: 42px; height: 42px; }
+    .buy-btn { width: 64px; height: 64px; font-size: 13px; }
+  }
+
+  @media (orientation: landscape) and (max-height: 380px) {
+    .controls { height: 56px; }
+    .stake-btn, .settings-btn, .round-timer { width: 38px; height: 38px; font-size: 18px; }
+    .buy-btn { width: 56px; height: 56px; font-size: 11px; }
+    .info-pill { min-width: 110px; font-size: 12px; padding: 7px 12px; }
   }
 </style>
 </head>
@@ -193,18 +280,31 @@
   <div id="app">
     <div class="header">
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><span class="bars"><span></span></span></button>
-      <div class="brand">THE <span class="accent">LAB</span></div>
-      <div class="header-spacer"></div>
+      <div class="brand"><span class="top">the</span><span class="accent">LAB</span></div>
+      <div class="header-right">
+        <div class="balance-bubble" id="headerBalance">&pound;10.00</div>
+        <button class="heart-btn" id="heartBtn" aria-label="Favourite">
+          <svg viewBox="0 0 24 24" fill="#e64a6a" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 5.5 5.5 5.5 0 0 1 21.5 12C19 16.65 12 21 12 21z"/></svg>
+        </button>
+      </div>
     </div>
 
-    <canvas id="game"></canvas>
+    <div class="canvas-wrap">
+      <canvas id="game"></canvas>
+      <div class="hud-overlay">
+        <span id="sessionTime">session time: --:--</span>
+        <span id="sessionBalance">session balance: 0p</span>
+      </div>
+    </div>
 
     <div class="controls">
-      <button class="info-pill clickable" id="leftPill">win up to &pound;250</button>
+      <div class="round-timer" id="roundTimer">--:--</div>
+      <button class="info-pill clickable" id="leftPill">Select stake<br>and buy</button>
       <button class="stake-btn" id="minus" aria-label="Decrease stake">&minus;</button>
-      <button class="buy-btn" id="buy">buy<br>50p</button>
+      <button class="buy-btn" id="buy">Buy<br>10p</button>
       <button class="stake-btn" id="plus" aria-label="Increase stake">+</button>
-      <div class="info-pill balance-pill" id="balancePill">balance &pound;10.00</div>
+      <div class="info-pill balance-pill" id="balancePill">Balance 0p</div>
+      <button class="settings-btn" id="settingsBtn" aria-label="Settings">&#9881;</button>
     </div>
 
     <div id="toast"></div>
@@ -274,7 +374,8 @@ const STAKES = [0.10, 0.20, 0.50, 1.00, 2.00];
 
 const state = {
   balance: 10.00,
-  stakeIdx: 2, // 50p default
+  startBalance: 10.00,
+  stakeIdx: 0, // 10p default
   playing: false,
   holding: false,
   bubbles: [],
@@ -288,7 +389,8 @@ const state = {
   benchShake: 0,
   pointerEnabled: false,
   jackPhase: 0,
-  steamPuffs: []
+  steamPuffs: [],
+  sessionStartMs: Date.now()
 };
 
 /* -------------------- Layout -------------------- */
@@ -370,6 +472,24 @@ function formatPrize(v) {
 }
 function formatBalance(v) {
   return '\u00A3' + v.toFixed(2);
+}
+// Compact balance like "0p" / "50p" / "\u00A31" / "\u00A310.00"
+function formatBalanceShort(v) {
+  if (v === 0) return '0p';
+  if (Math.abs(v) < 1) return Math.round(v * 100) + 'p';
+  if (Number.isInteger(v)) return '\u00A3' + v;
+  return '\u00A3' + v.toFixed(2);
+}
+function formatSignedBalance(v) {
+  if (v === 0) return '0p';
+  const sign = v > 0 ? '+' : '\u2212';
+  const abs = Math.abs(v);
+  return sign + formatBalanceShort(abs);
+}
+function formatClock(secs) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
 }
 
 /* -------------------- Audio -------------------- */
@@ -676,8 +796,14 @@ function roundMaxPrize() {
 }
 
 function updateHUD() {
-  // Balance
-  document.getElementById('balancePill').textContent = 'balance ' + formatBalance(state.balance);
+  // Bottom-bar Balance pill
+  document.getElementById('balancePill').textContent = 'Balance ' + formatBalanceShort(state.balance);
+  // Header balance bubble
+  const hb = document.getElementById('headerBalance');
+  if (hb) hb.textContent = formatBalance(state.balance);
+  // Session balance overlay (delta from session start)
+  const sb = document.getElementById('sessionBalance');
+  if (sb) sb.textContent = 'session balance: ' + formatSignedBalance(state.balance - state.startBalance);
 
   // Buy/Hold/Stop button
   const buy = document.getElementById('buy');
@@ -685,7 +811,7 @@ function updateHUD() {
   if (!state.playing) {
     buy.classList.remove('holding','disabled-state');
     const stakeText = formatPrize(stake);
-    buy.innerHTML = 'buy<br>' + stakeText;
+    buy.innerHTML = 'Buy<br>' + stakeText;
   } else {
     if (state.holding) {
       buy.classList.add('holding');
@@ -717,10 +843,24 @@ function updateHUD() {
     if (state.totalWin > 0) {
       left.innerHTML = 'you win <span class="em">' + formatPrize(state.totalWin) + '</span>';
     } else {
-      left.textContent = 'win up to ' + formatPrize(roundMaxPrize());
+      left.innerHTML = 'Select stake<br>and buy';
     }
   }
 }
+
+// Tick HUD (session time + round timer wall clock)
+function tickHUD() {
+  const elapsedSec = Math.floor((Date.now() - state.sessionStartMs) / 1000);
+  const st = document.getElementById('sessionTime');
+  if (st) st.textContent = 'session time: ' + formatClock(elapsedSec);
+  const rt = document.getElementById('roundTimer');
+  if (rt) {
+    const d = new Date();
+    rt.textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  }
+}
+setInterval(tickHUD, 1000);
+tickHUD();
 
 function startRound() {
   if (state.playing) return;
@@ -881,6 +1021,10 @@ document.getElementById('minus').addEventListener('click', function(){
 document.getElementById('menuBtn').addEventListener('click', function(){
   document.getElementById('settingsPanel').classList.add('show');
 });
+var settingsBtnEl = document.getElementById('settingsBtn');
+if (settingsBtnEl) settingsBtnEl.addEventListener('click', function(){
+  document.getElementById('settingsPanel').classList.add('show');
+});
 document.getElementById('closeSettings').addEventListener('click', function(){
   document.getElementById('settingsPanel').classList.remove('show');
 });
@@ -897,6 +1041,8 @@ document.getElementById('autoFinishChk').addEventListener('change', function(e){
 });
 document.getElementById('resetBal').addEventListener('click', function(){
   state.balance = 10.00;
+  state.startBalance = 10.00;
+  state.sessionStartMs = Date.now();
   updateHUD();
 });
 
