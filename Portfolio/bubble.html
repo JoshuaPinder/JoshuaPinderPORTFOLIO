@@ -11,106 +11,128 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
   html, body {
     width: 100%; height: 100%; overflow: hidden;
-    background: #e6f0e1;
+    background: #ecdcb8;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     touch-action: manipulation;
     color: #2a3e2e;
   }
   #app { position: fixed; inset: 0; }
-  #game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
 
-  .hud-top {
-    position: absolute; top: max(12px, env(safe-area-inset-top));
-    left: 12px; right: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-    pointer-events: none; z-index: 5;
+  /* Header bar */
+  .header {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 56px;
+    background: #29bdb1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 18px;
+    z-index: 8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
-  .pill {
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 22px;
-    padding: 9px 18px;
-    font-weight: 800;
-    font-size: 15px;
-    color: #2a3e2e;
-    box-shadow: 0 3px 10px rgba(20,50,30,0.12);
-    border: 1px solid rgba(255,255,255,0.6);
+  .menu-btn {
+    background: transparent; border: none; cursor: pointer;
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 26px;
   }
-  .pill .lbl { color: #7a8a7f; font-weight: 700; font-size: 12px; margin-right: 4px; }
+  .menu-btn .bars { display: inline-block; width: 22px; height: 16px; position: relative; }
+  .menu-btn .bars::before, .menu-btn .bars::after, .menu-btn .bars span {
+    content: ""; position: absolute; left: 0; right: 0; height: 3px; background: white; border-radius: 2px;
+  }
+  .menu-btn .bars::before { top: 0; }
+  .menu-btn .bars span { top: 50%; transform: translateY(-50%); }
+  .menu-btn .bars::after { bottom: 0; }
+  .brand {
+    color: white; font-weight: 900; letter-spacing: 1px; font-size: 22px;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
+  .brand .accent { color: #ffd23f; }
+  .header-spacer { width: 44px; }
 
+  #game { position: absolute; left: 0; right: 0; top: 56px; bottom: 76px; width: 100%; display: block; cursor: crosshair; }
+
+  /* Bottom controls bar */
   .controls {
-    position: absolute;
-    bottom: max(18px, env(safe-area-inset-bottom));
-    left: 50%; transform: translateX(-50%);
-    display: flex; gap: 12px; align-items: center;
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 76px;
+    background: #c08560;
+    border-top: 3px solid #97623d;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 0 12px;
     z-index: 6;
   }
-  .stake-btn {
-    background: linear-gradient(180deg, #ffffff, #f1f3ef);
-    width: 48px; height: 48px;
-    border-radius: 50%;
+  .info-pill {
+    background: #f6f0e0;
     border: none;
-    font-size: 26px; font-weight: 800;
-    color: #4a5b4e;
-    box-shadow: 0 4px 10px rgba(20,50,30,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
-    cursor: pointer;
-    transition: transform 0.08s ease;
+    border-radius: 26px;
+    padding: 11px 18px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #2a4f4b;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.10);
+    min-width: 120px;
+    text-align: center;
+    cursor: default;
     font-family: inherit;
   }
-  .stake-btn:active { transform: scale(0.9); }
-  .stake-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .info-pill.clickable { cursor: pointer; }
+  .info-pill .em { color: #ce4658; font-weight: 900; }
+
+  .stake-btn {
+    background: #29bdb1;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 26px; font-weight: 900;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.18);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    transition: transform 0.08s ease;
+  }
+  .stake-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.18); }
+  .stake-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
   .buy-btn {
-    background: linear-gradient(180deg, #ff7aa5, #e83b68);
+    background: #ce4658;
     color: white;
     border: none;
-    border-radius: 32px;
-    padding: 16px 36px;
-    font-size: 19px;
-    font-weight: 900;
-    letter-spacing: 0.6px;
-    box-shadow: 0 6px 18px rgba(232,54,95,0.45), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -3px 0 rgba(0,0,0,0.12);
-    cursor: pointer;
-    min-width: 170px;
-    font-family: inherit;
-    transition: transform 0.08s ease, filter 0.15s ease;
-  }
-  .buy-btn:active { transform: scale(0.96); }
-  .buy-btn.disabled {
-    background: linear-gradient(180deg, #c3ccc5, #9aa69e);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    cursor: default;
-  }
-
-  .corner-btn {
-    position: absolute;
-    width: 44px; height: 44px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.88);
-    border: 1px solid rgba(255,255,255,0.6);
-    font-size: 20px;
-    box-shadow: 0 3px 10px rgba(20,50,30,0.15);
+    width: 72px; height: 72px;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 6;
     font-family: inherit;
-    color: #4a5b4e;
-    font-weight: 800;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    transition: transform 0.08s ease, background 0.15s ease;
+    padding: 0 4px;
   }
-  .settings-btn { bottom: max(22px, env(safe-area-inset-bottom)); right: 14px; }
-  .round-ind {
-    bottom: max(22px, env(safe-area-inset-bottom)); left: 14px;
-    font-size: 13px;
-    pointer-events: none;
+  .buy-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+  .buy-btn.holding { background: #b03847; }
+  .buy-btn.disabled-state { background: #8b8b8b; cursor: default; }
+
+  .balance-pill { color: #2a4f4b; }
+
+  /* Win pill animation */
+  .info-pill.win-flash {
+    animation: winflash 0.6s ease;
+    color: #ce4658;
+  }
+  @keyframes winflash {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.1); }
+    100% { transform: scale(1); }
   }
 
+  /* Toast */
   #toast {
     position: absolute;
-    top: 42%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+    top: 38%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
     background: linear-gradient(180deg, #ffffff, #f4f9f1);
-    padding: 22px 34px;
+    padding: 18px 32px;
     border-radius: 22px;
     text-align: center;
     font-weight: 900;
@@ -127,6 +149,7 @@
   #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   #toast .sub { display:block; font-size: 14px; color: #7a8a7f; font-weight: 700; margin-top: 4px; }
 
+  /* Settings panel */
   .panel {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -136,52 +159,53 @@
     box-shadow: 0 14px 44px rgba(0,0,0,0.3);
     z-index: 20;
     display: none;
-    min-width: 260px;
+    min-width: 270px;
     font-weight: 700;
   }
-  .panel h2 { margin-bottom: 14px; font-size: 20px; }
+  .panel.show { display: block; }
+  .panel h2 { margin-bottom: 14px; font-size: 20px; color: #29bdb1; }
   .panel .row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; color: #555; }
   .panel .row input { transform: scale(1.3); margin-left: 10px; }
   .panel button.close {
     margin-top: 14px; width: 100%; padding: 12px;
-    background: linear-gradient(180deg, #9cdc9c, #60b85f);
+    background: #29bdb1;
     color: white; border: none; border-radius: 12px;
     font-weight: 800; cursor: pointer; font-size: 15px;
     font-family: inherit;
-    box-shadow: 0 4px 12px rgba(96,184,95,0.35);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.15);
   }
-  .panel.show { display: block; }
+  .panel .reset-btn {
+    background: #f6f0e0; border: none; padding: 8px 14px;
+    border-radius: 10px; font-family: inherit; font-weight: 800;
+    cursor: pointer; color: #ce4658;
+  }
 
-  .blurb {
-    position: absolute; top: 60px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 13px; font-weight: 700; color: #6e7f72;
-    background: rgba(255,255,255,0.7);
-    padding: 6px 14px; border-radius: 16px;
-    pointer-events: none;
-    z-index: 4;
+  @media (max-width: 600px) {
+    .info-pill { min-width: 90px; font-size: 12px; padding: 9px 12px; }
+    .buy-btn { width: 64px; height: 64px; font-size: 12px; }
+    .stake-btn { width: 40px; height: 40px; font-size: 22px; }
+    .brand { font-size: 18px; }
+    .controls { gap: 6px; padding: 0 6px; }
   }
 </style>
 </head>
 <body>
   <div id="app">
+    <div class="header">
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span class="bars"><span></span></span></button>
+      <div class="brand">THE <span class="accent">LAB</span></div>
+      <div class="header-spacer"></div>
+    </div>
+
     <canvas id="game"></canvas>
 
-    <div class="hud-top">
-      <div class="pill" id="timer"><span class="lbl">Session</span><span id="timerVal">00:00</span></div>
-      <div class="pill" id="balance"><span class="lbl">Balance</span><span id="balanceVal">&pound;10.00</span></div>
-    </div>
-
-    <div class="blurb" id="blurb">Tap BUY to start — pop bubbles to fill a beaker!</div>
-
     <div class="controls">
+      <button class="info-pill clickable" id="leftPill">win up to &pound;250</button>
       <button class="stake-btn" id="minus" aria-label="Decrease stake">&minus;</button>
-      <button class="buy-btn" id="buy">BUY 10p</button>
+      <button class="buy-btn" id="buy">buy<br>50p</button>
       <button class="stake-btn" id="plus" aria-label="Increase stake">+</button>
+      <div class="info-pill balance-pill" id="balancePill">balance &pound;10.00</div>
     </div>
-
-    <button class="corner-btn settings-btn" id="settings" aria-label="Settings">&#9881;</button>
-    <div class="corner-btn round-ind" id="roundInd">&mdash;</div>
 
     <div id="toast"></div>
 
@@ -189,7 +213,8 @@
       <h2>Settings</h2>
       <div class="row"><span>Music</span><input type="checkbox" id="musicChk" checked></div>
       <div class="row"><span>Sound FX</span><input type="checkbox" id="sfxChk" checked></div>
-      <div class="row"><span>Reset balance</span><button id="resetBal" style="background:#eee;border:none;padding:6px 12px;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;">&pound;10</button></div>
+      <div class="row"><span>Auto-pop on stop</span><input type="checkbox" id="autoFinishChk" checked></div>
+      <div class="row"><span>Reset balance</span><button class="reset-btn" id="resetBal">&pound;10</button></div>
       <button class="close" id="closeSettings">Close</button>
     </div>
   </div>
@@ -199,8 +224,11 @@
 'use strict';
 
 /* =========================================================
-   The Lab — bubble-popping beaker-fill arcade game.
-   Single-file, no dependencies. Canvas + Web Audio API.
+   THE LAB — bubble-popping beaker-fill arcade game.
+   - 7 beakers with prize values that scale with stake.
+   - Multipliers: 1x, 2x, 5x, 10x, 20x, 50x, 500x.
+   - Hold-to-pop / pop-all-bubbles / tap-to-pop interactions.
+   - Procedural soundtrack and SFX.
    ========================================================= */
 
 const canvas = document.getElementById('game');
@@ -210,96 +238,143 @@ let W = 0, H = 0, DPR = 1;
 
 function resize() {
   DPR = Math.min(window.devicePixelRatio || 1, 2);
-  W = window.innerWidth;
-  H = window.innerHeight;
+  const rect = canvas.getBoundingClientRect();
+  W = rect.width;
+  H = rect.height;
   canvas.width  = Math.floor(W * DPR);
   canvas.height = Math.floor(H * DPR);
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  layoutBeakers();
+  layoutScene();
 }
-window.addEventListener('resize', resize);
-window.addEventListener('orientationchange', function(){ setTimeout(resize, 120); });
+window.addEventListener('resize', function(){ setTimeout(resize, 50); });
+window.addEventListener('orientationchange', function(){ setTimeout(resize, 200); });
 
 /* -------------------- Game data -------------------- */
-const BEAKER_DATA = [
-  { value: 0.10,  label: '10p',  color: '#ff6fb0', color2: '#ff8fc3', segments: 6,  shape: 'beaker' },
-  { value: 0.20,  label: '20p',  color: '#ffd23f', color2: '#ffe27a', segments: 6,  shape: 'beaker' },
-  { value: 0.50,  label: '50p',  color: '#4ec5e8', color2: '#7ed6ee', segments: 6,  shape: 'beaker' },
-  { value: 1.00,  label: '\u00A31',  color: '#9b6dff', color2: '#b995ff', segments: 6,  shape: 'erlenmeyer' },
-  { value: 2.00,  label: '\u00A32',  color: '#4d8cff', color2: '#7da9ff', segments: 7,  shape: 'beaker' },
-  { value: 5.00,  label: '\u00A35',  color: '#5ecf5a', color2: '#88de85', segments: 7,  shape: 'erlenmeyer' },
-  { value: 50.00, label: '\u00A350', color: '#e63946', color2: '#ff6a74', segments: 8, shape: 'flask' }
+// Multipliers: prize = stake * multiplier.
+// Determined from reference: 50p stake -> 50p,£1,£2.50,£5,£10,£25,£250
+const BEAKER_MULTIPLIERS = [1, 2, 5, 10, 20, 50, 500];
+
+// Beaker visual definitions (idx 0..6, in left-to-right play order)
+const BEAKER_DEFS = [
+  // idx, label drawn from prize, color, color2 (light), shape, position, segments to fill, sizeRatio
+  { idx: 0, color: '#d670a8', color2: '#e891bb', shape: 'beaker',     loc: 'shelf', segments: 5, size: 0.75 }, // pink   1x
+  { idx: 1, color: '#e9a738', color2: '#f0bf6b', shape: 'erlenmeyer', loc: 'shelf', segments: 5, size: 0.85 }, // yellow 2x
+  { idx: 2, color: '#84c8c4', color2: '#a8d9d6', shape: 'beaker',     loc: 'shelf', segments: 5, size: 0.78 }, // cyan   5x
+  { idx: 3, color: '#7e4fa6', color2: '#9c70be', shape: 'beaker',     loc: 'bench', segments: 6, size: 0.9 }, // purple 10x
+  { idx: 4, color: '#4a91cd', color2: '#7eb1da', shape: 'erlenmeyer', loc: 'lifted', segments: 6, size: 1.1 }, // blue   20x  (tallest, on jack)
+  { idx: 5, color: '#7ab36a', color2: '#94c485', shape: 'beaker',     loc: 'bench', segments: 6, size: 0.85 }, // green  50x
+  { idx: 6, color: '#d34a4a', color2: '#e57878', shape: 'flask',      loc: 'apparatus', segments: 7, size: 1.0 }, // red    500x
 ];
 
-// Bubble spawn weights (must sum to ~1). Weighted inversely with value so low payouts dominate.
-const BUBBLE_WEIGHTS = [0.30, 0.25, 0.18, 0.12, 0.08, 0.05, 0.02];
+// Bubble color spawn weights (chance of each color per bubble) + miss weight
+// Index aligns with BEAKER_DEFS; last value = 'miss' (no fill)
+const BUBBLE_WEIGHTS = [0.28, 0.20, 0.14, 0.10, 0.07, 0.04, 0.012, 0.158]; // last = miss (~16%)
 
-const STAKES = [0.05, 0.10, 0.20, 0.50, 1.00, 2.00];
+const STAKES = [0.10, 0.20, 0.50, 1.00, 2.00];
 
 const state = {
   balance: 10.00,
-  stakeIdx: 1,
+  stakeIdx: 2, // 50p default
   playing: false,
+  holding: false,
   bubbles: [],
   particles: [],
   beakers: [],
   bubblesToSpawn: 0,
-  bubblesOnScreenMax: 14,
-  attemptsUsed: 0,
-  attemptsMax: 25,
+  bubblesOnScreenMax: 16,
   spawnCooldown: 0,
-  won: null,
-  winCelebrateT: 0,
-  sessionStart: Date.now(),
+  totalWin: 0,
+  finishing: false,
   benchShake: 0,
-  pointerEnabled: false
+  pointerEnabled: false,
+  jackPhase: 0,
+  steamPuffs: []
 };
 
 /* -------------------- Layout -------------------- */
-let benchY = 0;
-function layoutBeakers() {
+let benchY = 0, shelfY = 0, shelfX1 = 0, shelfX2 = 0;
+function layoutScene() {
   state.beakers = [];
-  const isLandscape = W > H;
-  benchY = H * (isLandscape ? 0.72 : 0.70);
+  benchY = H * 0.78;
+  shelfY = H * 0.50;
+  // Left shelf occupies left ~46% of canvas above bench
+  shelfX1 = W * 0.05;
+  shelfX2 = W * 0.46;
 
-  const availW = Math.min(W * 0.94, isLandscape ? W * 0.80 : 760);
-  const startX = (W - availW) / 2;
-  const count = BEAKER_DATA.length;
-  const slotW = availW / count;
+  const stake = STAKES[state.stakeIdx];
 
-  const maxBeakerH = Math.min(H * 0.34, benchY - H * 0.18);
+  // Slot positions for the 7 beakers
+  const positions = [];
+  // Beakers 0..2 sit on the shelf
+  const shelfCount = 3;
+  const shelfSpan = shelfX2 - shelfX1 - 30;
+  for (let i = 0; i < shelfCount; i++) {
+    const cx = shelfX1 + 20 + (shelfSpan / (shelfCount)) * (i + 0.5);
+    positions.push({ cx: cx, baseY: shelfY + 6 });
+  }
+  // Beakers 3..6 sit on the main bench, distributed across the right ~60%
+  const benchCount = 4;
+  const benchLeft = W * 0.40;
+  const benchRight = W * 0.96;
+  const benchSpan = benchRight - benchLeft;
+  for (let i = 0; i < benchCount; i++) {
+    let cx = benchLeft + (benchSpan / benchCount) * (i + 0.5);
+    let baseY = benchY + 4;
+    if (BEAKER_DEFS[3 + i].loc === 'lifted') {
+      // Scissor jack lift — base raised
+      baseY = benchY - H * 0.04;
+    }
+    positions.push({ cx: cx, baseY: baseY });
+  }
 
-  for (let i = 0; i < count; i++) {
-    const d = BEAKER_DATA[i];
-    const cx = startX + slotW * (i + 0.5);
+  for (let i = 0; i < BEAKER_DEFS.length; i++) {
+    const d = BEAKER_DEFS[i];
+    const stakeValue = stake * BEAKER_MULTIPLIERS[i];
+    const label = formatPrize(stakeValue);
 
-    // Gentle size variation: grows left -> right
-    const sizeRatio = 0.82 + (i / (count - 1)) * 0.28;
-    const bh = maxBeakerH * sizeRatio;
-    const bw = slotW * (d.shape === 'flask' ? 0.95 : d.shape === 'erlenmeyer' ? 0.85 : 0.78);
+    // Sizing
+    const baseH = Math.min(H * 0.18, 130) * d.size;
+    let baseW = baseH * (d.shape === 'flask' ? 1.0 : d.shape === 'erlenmeyer' ? 0.85 : 0.78);
 
-    state.beakers.push(Object.assign({}, d, {
-      idx: i,
-      cx: cx,
-      baseY: benchY + H * 0.012,
-      w: bw,
-      h: bh,
+    state.beakers.push({
+      defIdx: i,
+      label: label,
+      prize: stakeValue,
+      color: d.color,
+      color2: d.color2,
+      shape: d.shape,
+      segments: d.segments,
+      loc: d.loc,
+      cx: positions[i].cx,
+      baseY: positions[i].baseY,
+      w: baseW,
+      h: baseH,
       fill: 0,
       displayFill: 0,
       glowT: 0,
       shakeT: 0,
       sloshPhase: Math.random() * Math.PI * 2,
       sloshAmp: 0,
-      sparkles: []
-    }));
+      sparkles: [],
+      paid: false
+    });
   }
+}
+
+/* -------------------- Format helpers -------------------- */
+function formatPrize(v) {
+  if (v < 1) return Math.round(v * 100) + 'p';
+  if (Number.isInteger(v)) return '\u00A3' + v;
+  // 2.50 -> "£2.50", 7.5 -> "£7.50"
+  return '\u00A3' + v.toFixed(2);
+}
+function formatBalance(v) {
+  return '\u00A3' + v.toFixed(2);
 }
 
 /* -------------------- Audio -------------------- */
 let audioCtx = null;
-let musicOn = true, sfxOn = true;
+let musicOn = true, sfxOn = true, autoFinishOn = true;
 let musicTimer = null;
 let masterMusicGain = null, masterSfxGain = null;
 
@@ -311,7 +386,7 @@ function ensureAudio() {
   try {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     masterMusicGain = audioCtx.createGain();
-    masterMusicGain.gain.value = musicOn ? 0.14 : 0.0;
+    masterMusicGain.gain.value = musicOn ? 0.13 : 0.0;
     masterMusicGain.connect(audioCtx.destination);
     masterSfxGain = audioCtx.createGain();
     masterSfxGain.gain.value = sfxOn ? 0.55 : 0.0;
@@ -321,15 +396,15 @@ function ensureAudio() {
 }
 
 function startMusic() {
-  // Warm chiptune loop: I - vi - IV - V in C, with a light arpeggio
+  // Light playful loop: I - V - vi - IV in C
   const chords = [
     { bass: 65.41, notes: [261.63, 329.63, 392.00, 523.25] }, // C
+    { bass: 49.00, notes: [196.00, 246.94, 293.66, 392.00] }, // G
     { bass: 55.00, notes: [220.00, 261.63, 329.63, 440.00] }, // Am
-    { bass: 43.65, notes: [174.61, 220.00, 261.63, 349.23] }, // F
-    { bass: 49.00, notes: [196.00, 246.94, 293.66, 392.00] }  // G
+    { bass: 43.65, notes: [174.61, 220.00, 261.63, 349.23] }  // F
   ];
   let step = 0;
-  const STEP_MS = 480;
+  const STEP_MS = 460;
   function tick() {
     if (!audioCtx) return;
     const chord = chords[Math.floor(step / 4) % chords.length];
@@ -341,10 +416,10 @@ function startMusic() {
       osc.type = 'triangle';
       osc.frequency.value = chord.bass;
       g.gain.setValueAtTime(0, now);
-      g.gain.linearRampToValueAtTime(0.55, now + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+      g.gain.linearRampToValueAtTime(0.5, now + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
       osc.connect(g); g.connect(masterMusicGain);
-      osc.start(now); osc.stop(now + 1.6);
+      osc.start(now); osc.stop(now + 1.5);
     }
     const arpOrder = [0, 2, 1, 3];
     const freq = chord.notes[arpOrder[step % 4]];
@@ -353,7 +428,7 @@ function startMusic() {
     o.type = 'sine';
     o.frequency.value = freq;
     g2.gain.setValueAtTime(0, now);
-    g2.gain.linearRampToValueAtTime(0.32, now + 0.015);
+    g2.gain.linearRampToValueAtTime(0.30, now + 0.015);
     g2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
     o.connect(g2); g2.connect(masterMusicGain);
     o.start(now); o.stop(now + 0.55);
@@ -364,7 +439,7 @@ function startMusic() {
       s.type = 'sine';
       s.frequency.value = freq * 2;
       sg.gain.setValueAtTime(0, now);
-      sg.gain.linearRampToValueAtTime(0.12, now + 0.03);
+      sg.gain.linearRampToValueAtTime(0.10, now + 0.03);
       sg.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
       s.connect(sg); sg.connect(masterMusicGain);
       s.start(now); s.stop(now + 0.45);
@@ -381,37 +456,36 @@ function playPop(size) {
   const osc = audioCtx.createOscillator();
   const g = audioCtx.createGain();
   osc.type = 'sine';
-  const baseFreq = 900 - Math.min(size, 50) * 7;
+  const baseFreq = 950 - Math.min(size, 60) * 6;
   osc.frequency.setValueAtTime(baseFreq * 1.8, t);
-  osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.5, t + 0.11);
+  osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.45, t + 0.10);
   g.gain.setValueAtTime(0.0, t);
-  g.gain.linearRampToValueAtTime(0.35, t + 0.008);
-  g.gain.exponentialRampToValueAtTime(0.001, t + 0.17);
+  g.gain.linearRampToValueAtTime(0.30, t + 0.006);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
   osc.connect(g); g.connect(masterSfxGain);
-  osc.start(t); osc.stop(t + 0.2);
+  osc.start(t); osc.stop(t + 0.18);
 }
-
-function playFillTick() {
+function playFillTick(strength) {
   if (!audioCtx) return;
   const t = audioCtx.currentTime;
   const o = audioCtx.createOscillator();
   const g = audioCtx.createGain();
   o.type = 'triangle';
-  o.frequency.setValueAtTime(420, t);
-  o.frequency.exponentialRampToValueAtTime(560, t + 0.08);
-  g.gain.setValueAtTime(0.18, t);
-  g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+  const f0 = 380 + (strength || 0) * 60;
+  o.frequency.setValueAtTime(f0, t);
+  o.frequency.exponentialRampToValueAtTime(f0 + 200, t + 0.08);
+  g.gain.setValueAtTime(0.16, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.13);
   o.connect(g); g.connect(masterSfxGain);
-  o.start(t); o.stop(t + 0.14);
+  o.start(t); o.stop(t + 0.15);
 }
-
 function playWinJingle(value) {
   if (!audioCtx) return;
   const t0 = audioCtx.currentTime;
-  const scale = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-  const steps = value >= 5 ? 5 : value >= 1 ? 4 : 3;
+  const scale = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+  const steps = value >= 50 ? 6 : value >= 10 ? 5 : value >= 2 ? 4 : 3;
   for (let i = 0; i < steps; i++) {
-    const t = t0 + i * 0.09;
+    const t = t0 + i * 0.085;
     const o = audioCtx.createOscillator();
     const g = audioCtx.createGain();
     o.type = 'square';
@@ -423,7 +497,6 @@ function playWinJingle(value) {
     o.start(t); o.stop(t + 0.3);
   }
 }
-
 function playLoseSound() {
   if (!audioCtx) return;
   const t = audioCtx.currentTime;
@@ -434,54 +507,74 @@ function playLoseSound() {
     const g = audioCtx.createGain();
     o.type = 'triangle';
     o.frequency.value = f;
-    const st = t + i * 0.11;
+    const st = t + i * 0.10;
     g.gain.setValueAtTime(0, st);
-    g.gain.linearRampToValueAtTime(0.15, st + 0.015);
-    g.gain.exponentialRampToValueAtTime(0.001, st + 0.25);
+    g.gain.linearRampToValueAtTime(0.14, st + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.001, st + 0.22);
     o.connect(g); g.connect(masterSfxGain);
-    o.start(st); o.stop(st + 0.3);
+    o.start(st); o.stop(st + 0.27);
+  }
+}
+function playGoldChime() {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+  const freqs = [880, 1318.51, 1760];
+  for (let i = 0; i < freqs.length; i++) {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine';
+    o.frequency.value = freqs[i];
+    g.gain.setValueAtTime(0, t + i * 0.04);
+    g.gain.linearRampToValueAtTime(0.18, t + i * 0.04 + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, t + i * 0.04 + 0.6);
+    o.connect(g); g.connect(masterSfxGain);
+    o.start(t + i * 0.04); o.stop(t + i * 0.04 + 0.7);
   }
 }
 
 /* -------------------- Bubbles -------------------- */
-function chooseColorIdx() {
+function chooseBubblePayload() {
+  // Returns { colorIdx: -1 (miss) or 0..6, isGold: bool }
   const r = Math.random();
   let acc = 0;
   for (let i = 0; i < BUBBLE_WEIGHTS.length; i++) {
     acc += BUBBLE_WEIGHTS[i];
-    if (r < acc) return i;
+    if (r < acc) {
+      if (i >= BEAKER_DEFS.length) return { colorIdx: -1, isGold: false };
+      // Tiny chance it becomes a gold-plasma instant-fill bubble
+      const isGold = Math.random() < 0.012;
+      return { colorIdx: i, isGold: isGold };
+    }
   }
-  return 0;
+  return { colorIdx: -1, isGold: false };
 }
 
 function spawnBubble() {
-  const idx = chooseColorIdx();
-  const data = BEAKER_DATA[idx];
+  const payload = chooseBubblePayload();
+  // Sizes: small/medium/large
   const roll = Math.random();
   let r;
-  if (roll < 0.15) r = 38 + Math.random() * 10;
-  else if (roll < 0.45) r = 28 + Math.random() * 8;
-  else r = 20 + Math.random() * 6;
-
-  const special = Math.random() < 0.05;
-  const golden = Math.random() < 0.008;
+  if (roll < 0.18) r = 44 + Math.random() * 12; // large
+  else if (roll < 0.55) r = 32 + Math.random() * 10; // medium
+  else r = 22 + Math.random() * 8; // small
 
   return {
-    x: 24 + Math.random() * (W - 48),
+    x: 30 + Math.random() * (W - 60),
     y: H + r + 10,
-    vx: (Math.random() - 0.5) * 0.25,
-    vy: -(0.45 + Math.random() * 0.5) - r * 0.003,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: -(0.45 + Math.random() * 0.45) - r * 0.0025,
     r: r,
-    colorIdx: idx,
-    color: data.color,
-    color2: data.color2,
+    colorIdx: payload.colorIdx,
+    color: payload.colorIdx >= 0 ? BEAKER_DEFS[payload.colorIdx].color : '#cccccc',
+    color2: payload.colorIdx >= 0 ? BEAKER_DEFS[payload.colorIdx].color2 : '#e0e0e0',
+    isGold: payload.isGold,
     swayPhase: Math.random() * Math.PI * 2,
-    swaySpeed: 0.014 + Math.random() * 0.012,
-    swayAmp: 0.35 + Math.random() * 0.55,
+    swaySpeed: 0.012 + Math.random() * 0.012,
+    swayAmp: 0.4 + Math.random() * 0.6,
     wobble: Math.random() * Math.PI * 2,
+    rimPhase: Math.random() * Math.PI * 2,
+    blobJiggle: Math.random() * Math.PI * 2,
     life: 0,
-    special: special,
-    golden: golden,
     popped: false
   };
 }
@@ -490,95 +583,143 @@ function popBubble(b) {
   if (b.popped) return;
   b.popped = true;
 
+  // Burst particles
   const pCount = 8 + Math.floor(b.r / 6);
   for (let i = 0; i < pCount; i++) {
     const ang = (i / pCount) * Math.PI * 2 + Math.random() * 0.4;
-    const spd = 1.5 + Math.random() * 3.2;
+    const spd = 1.5 + Math.random() * 3.0;
     state.particles.push({
       kind: 'spark',
       x: b.x, y: b.y,
       vx: Math.cos(ang) * spd,
       vy: Math.sin(ang) * spd,
       r: 2 + Math.random() * 3,
-      color: b.color,
-      life: 22 + Math.random() * 10,
+      color: b.colorIdx >= 0 ? b.color : '#ffffff',
+      life: 22 + Math.random() * 8,
       maxLife: 30,
       grav: 0.08
     });
   }
+  // Ripple ring
   state.particles.push({
     kind: 'ripple', x: b.x, y: b.y,
-    r: b.r, maxR: b.r * 2.6, curR: b.r,
-    life: 22, maxLife: 22, color: b.color
+    r: b.r, maxR: b.r * 2.4, curR: b.r,
+    life: 22, maxLife: 22,
+    color: b.colorIdx >= 0 ? b.color : '#ffffff'
   });
 
+  // If miss, no payload
+  if (b.colorIdx < 0) {
+    playPop(b.r);
+    removeBubble(b);
+    return;
+  }
+
+  if (b.isGold) playGoldChime(); else playPop(b.r);
+
+  // Streaming colored blob arc to beaker
   const beaker = state.beakers[b.colorIdx];
-  const targetY = beaker.baseY - beaker.h * (beaker.displayFill / beaker.segments) - 8;
-  state.particles.push({
-    kind: 'stream',
-    x: b.x, y: b.y,
-    cx: b.x + (beaker.cx - b.x) * 0.5 + (Math.random() - 0.5) * 80,
-    cy: Math.min(b.y, beaker.baseY) - 90 - Math.random() * 40,
-    tx: beaker.cx,
-    ty: targetY,
-    color: b.color,
-    life: 30, maxLife: 30,
-    bIdx: beaker.idx,
-    isGolden: b.golden, isSpecial: b.special,
-    applied: false, t: 0
-  });
+  if (beaker) {
+    const targetY = beaker.baseY - beaker.h * (beaker.displayFill / beaker.segments) - 8;
+    state.particles.push({
+      kind: 'stream',
+      x: b.x, y: b.y,
+      cx: b.x + (beaker.cx - b.x) * 0.5 + (Math.random() - 0.5) * 80,
+      cy: Math.min(b.y, beaker.baseY) - 90 - Math.random() * 30,
+      tx: beaker.cx,
+      ty: targetY,
+      color: b.color,
+      color2: b.color2,
+      life: 30, maxLife: 30,
+      bIdx: beaker.defIdx,
+      isGold: b.isGold,
+      applied: false, t: 0
+    });
+  }
+  removeBubble(b);
+}
 
-  playPop(b.r);
+function removeBubble(b) {
   const i = state.bubbles.indexOf(b);
   if (i >= 0) state.bubbles.splice(i, 1);
 }
 
-function applyFill(beakerIdx, isGolden, isSpecial) {
+function applyFill(beakerIdx, isGold) {
   const beaker = state.beakers[beakerIdx];
-  if (!beaker || state.won) return;
-  let add = 1;
-  if (isSpecial) add = 2;
-  if (isGolden) add = beaker.segments; // instant fill
+  if (!beaker || beaker.paid) return;
+  const add = isGold ? beaker.segments : 1;
   beaker.fill = Math.min(beaker.segments, beaker.fill + add);
   beaker.sloshAmp = Math.min(beaker.sloshAmp + 6, 14);
-  beaker.shakeT = 8;
-  playFillTick();
-  for (let i = 0; i < 4; i++) {
+  beaker.shakeT = 6;
+  playFillTick(Math.min(4, beaker.fill));
+  for (let i = 0; i < (isGold ? 14 : 4); i++) {
     beaker.sparkles.push({
       x: (Math.random() - 0.5) * beaker.w * 0.7,
       y: 0,
-      vy: -0.4 - Math.random() * 0.6,
+      vy: -0.5 - Math.random() * 0.6,
       vx: (Math.random() - 0.5) * 0.6,
       life: 24 + Math.random() * 14,
       maxLife: 38
     });
   }
-  if (beaker.fill >= beaker.segments && !state.won) {
-    winRound(beaker);
+  if (beaker.fill >= beaker.segments) {
+    beaker.glowT = 60;
+    beaker.shakeT = 14;
+    state.benchShake = 6;
   }
 }
 
 /* -------------------- Round control -------------------- */
-function fmtPretty(v) {
-  if (v < 1) return Math.round(v * 100) + 'p';
-  return '\u00A3' + (Number.isInteger(v) ? v.toString() : v.toFixed(2));
+function roundMaxPrize() {
+  const stake = STAKES[state.stakeIdx];
+  return stake * BEAKER_MULTIPLIERS[BEAKER_MULTIPLIERS.length - 1];
 }
 
 function updateHUD() {
-  document.getElementById('balanceVal').textContent = '\u00A3' + state.balance.toFixed(2);
-  const stake = STAKES[state.stakeIdx];
+  // Balance
+  document.getElementById('balancePill').textContent = 'balance ' + formatBalance(state.balance);
+
+  // Buy/Hold/Stop button
   const buy = document.getElementById('buy');
-  if (state.playing) {
-    buy.textContent = 'PLAYING\u2026';
-    buy.classList.add('disabled');
+  const stake = STAKES[state.stakeIdx];
+  if (!state.playing) {
+    buy.classList.remove('holding','disabled-state');
+    const stakeText = formatPrize(stake);
+    buy.innerHTML = 'buy<br>' + stakeText;
   } else {
-    buy.textContent = 'BUY ' + fmtPretty(stake);
-    buy.classList.remove('disabled');
+    if (state.holding) {
+      buy.classList.add('holding');
+      buy.classList.remove('disabled-state');
+      buy.innerHTML = 'stop';
+    } else if (state.finishing) {
+      buy.classList.add('disabled-state');
+      buy.classList.remove('holding');
+      buy.innerHTML = 'wait';
+    } else {
+      buy.classList.remove('holding','disabled-state');
+      buy.innerHTML = 'hold<br>to pop';
+    }
   }
+
+  // Stake +/-
   document.getElementById('minus').disabled = state.playing || state.stakeIdx === 0;
   document.getElementById('plus').disabled  = state.playing || state.stakeIdx === STAKES.length - 1;
-  document.getElementById('roundInd').textContent =
-    state.playing ? String(Math.max(0, state.attemptsMax - state.attemptsUsed)) : '\u2014';
+
+  // Left pill
+  const left = document.getElementById('leftPill');
+  if (state.playing) {
+    if (state.totalWin > 0) {
+      left.innerHTML = 'you win <span class="em">' + formatPrize(state.totalWin) + '</span>';
+    } else {
+      left.textContent = 'pop all bubbles';
+    }
+  } else {
+    if (state.totalWin > 0) {
+      left.innerHTML = 'you win <span class="em">' + formatPrize(state.totalWin) + '</span>';
+    } else {
+      left.textContent = 'win up to ' + formatPrize(roundMaxPrize());
+    }
+  }
 }
 
 function startRound() {
@@ -592,47 +733,53 @@ function startRound() {
   }
   state.balance -= stake;
   state.playing = true;
+  state.holding = false;
+  state.finishing = false;
   state.pointerEnabled = true;
-  state.attemptsUsed = 0;
-  state.attemptsMax = 25;
-  state.bubblesToSpawn = 25;
+  state.bubblesToSpawn = 26;
   state.spawnCooldown = 0;
-  state.won = null;
-  state.winCelebrateT = 0;
+  state.totalWin = 0;
   state.bubbles = [];
   state.particles = [];
-  for (let i = 0; i < state.beakers.length; i++) {
-    const b = state.beakers[i];
-    b.fill = 0; b.displayFill = 0;
-    b.glowT = 0; b.shakeT = 0;
-    b.sloshAmp = 0; b.sparkles = [];
-  }
-  const blurb = document.getElementById('blurb');
-  if (blurb) blurb.style.display = 'none';
+  // Reset beakers, refresh prizes from current stake
+  layoutScene();
   updateHUD();
-}
-
-function winRound(beaker) {
-  state.won = beaker;
-  state.winCelebrateT = 0;
-  beaker.glowT = 60;
-  beaker.shakeT = 18;
-  state.benchShake = 8;
-  playWinJingle(beaker.value);
 }
 
 function endRound() {
   state.playing = false;
   state.pointerEnabled = false;
-  if (state.won) {
-    const prize = state.won.value;
-    state.balance += prize;
-    showToast('YOU WIN ' + fmtPretty(prize) + '!', 'Beaker filled', 2500);
+  state.holding = false;
+  state.finishing = false;
+
+  // Tally wins from filled beakers
+  let total = 0;
+  for (let i = 0; i < state.beakers.length; i++) {
+    const bk = state.beakers[i];
+    if (bk.fill >= bk.segments && !bk.paid) {
+      bk.paid = true;
+      total += bk.prize;
+    }
+  }
+  if (total > 0) {
+    state.totalWin = total;
+    state.balance += total;
+    showToast('YOU WIN ' + formatPrize(total) + '!', 'Beakers filled', 2400);
+    playWinJingle(total);
+    flashWinPill();
   } else {
-    showToast('No win', 'Try again!', 1400);
+    state.totalWin = 0;
+    showToast('No win', 'Try again!', 1300);
     playLoseSound();
   }
   updateHUD();
+}
+
+function flashWinPill() {
+  const left = document.getElementById('leftPill');
+  left.classList.remove('win-flash');
+  void left.offsetWidth; // restart animation
+  left.classList.add('win-flash');
 }
 
 /* -------------------- Toast -------------------- */
@@ -662,21 +809,76 @@ canvas.addEventListener('pointerdown', function(e) {
   }
 });
 
-document.getElementById('buy').addEventListener('click', function(){
+// Buy / Hold-to-pop / Stop
+const buyBtn = document.getElementById('buy');
+let holdInterval = null;
+
+function holdStart() {
+  if (!state.playing) return;
+  state.holding = true;
+  updateHUD();
+  // Repeatedly pop random bubbles while holding
+  if (holdInterval) clearInterval(holdInterval);
+  holdInterval = setInterval(function(){
+    if (state.bubbles.length > 0) {
+      // Prefer top-most bubble
+      let pick = state.bubbles[0];
+      for (let i = 1; i < state.bubbles.length; i++) {
+        if (state.bubbles[i].y < pick.y) pick = state.bubbles[i];
+      }
+      popBubble(pick);
+    }
+  }, 90);
+}
+function holdStop() {
+  state.holding = false;
+  if (holdInterval) { clearInterval(holdInterval); holdInterval = null; }
+  updateHUD();
+}
+
+buyBtn.addEventListener('pointerdown', function(e){
   ensureAudio();
-  if (!state.playing) startRound();
+  e.preventDefault();
+  if (!state.playing) {
+    startRound();
+  } else if (state.finishing) {
+    return;
+  } else {
+    holdStart();
+  }
 });
+buyBtn.addEventListener('pointerup', function(){
+  if (state.holding) holdStop();
+});
+buyBtn.addEventListener('pointerleave', function(){
+  if (state.holding) holdStop();
+});
+buyBtn.addEventListener('pointercancel', function(){
+  if (state.holding) holdStop();
+});
+
+// Pop all bubbles
+document.getElementById('leftPill').addEventListener('click', function(){
+  if (!state.playing) return;
+  // Pop everything currently on screen and stop further spawns
+  for (let i = state.bubbles.length - 1; i >= 0; i--) popBubble(state.bubbles[i]);
+  state.bubblesToSpawn = 0;
+});
+
 document.getElementById('plus').addEventListener('click', function(){
   if (state.playing) return;
   if (state.stakeIdx < STAKES.length - 1) state.stakeIdx++;
+  layoutScene();
   updateHUD();
 });
 document.getElementById('minus').addEventListener('click', function(){
   if (state.playing) return;
   if (state.stakeIdx > 0) state.stakeIdx--;
+  layoutScene();
   updateHUD();
 });
-document.getElementById('settings').addEventListener('click', function(){
+
+document.getElementById('menuBtn').addEventListener('click', function(){
   document.getElementById('settingsPanel').classList.add('show');
 });
 document.getElementById('closeSettings').addEventListener('click', function(){
@@ -684,11 +886,14 @@ document.getElementById('closeSettings').addEventListener('click', function(){
 });
 document.getElementById('musicChk').addEventListener('change', function(e){
   musicOn = e.target.checked;
-  if (masterMusicGain) masterMusicGain.gain.value = musicOn ? 0.14 : 0.0;
+  if (masterMusicGain) masterMusicGain.gain.value = musicOn ? 0.13 : 0.0;
 });
 document.getElementById('sfxChk').addEventListener('change', function(e){
   sfxOn = e.target.checked;
   if (masterSfxGain) masterSfxGain.gain.value = sfxOn ? 0.55 : 0.0;
+});
+document.getElementById('autoFinishChk').addEventListener('change', function(e){
+  autoFinishOn = e.target.checked;
 });
 document.getElementById('resetBal').addEventListener('click', function(){
   state.balance = 10.00;
@@ -699,6 +904,7 @@ document.getElementById('resetBal').addEventListener('click', function(){
 let lastT = performance.now();
 function update(dtMs) {
   const dt = Math.min(dtMs, 40) / 16.666;
+  state.jackPhase += 0.04 * dt;
 
   if (state.playing) {
     state.spawnCooldown -= dt;
@@ -707,7 +913,7 @@ function update(dtMs) {
         state.bubbles.length < state.bubblesOnScreenMax) {
       state.bubbles.push(spawnBubble());
       state.bubblesToSpawn--;
-      state.spawnCooldown = 12 + Math.random() * 16;
+      state.spawnCooldown = 9 + Math.random() * 14;
     }
   }
 
@@ -716,23 +922,19 @@ function update(dtMs) {
     const b = state.bubbles[i];
     b.life += dt;
     b.swayPhase += b.swaySpeed * dt;
-    b.wobble += 0.08 * dt;
+    b.wobble += 0.07 * dt;
+    b.rimPhase += 0.025 * dt;
+    b.blobJiggle += 0.05 * dt;
     const sway = Math.sin(b.swayPhase) * b.swayAmp;
-    b.vx = sway * 0.5;
-    b.vy = Math.max(b.vy - 0.002 * dt, -1.6);
+    b.vx = sway * 0.55;
+    b.vy = Math.max(b.vy - 0.0018 * dt, -1.55);
     b.x += b.vx * dt;
     b.y += b.vy * dt;
     if (b.x < b.r + 4) { b.x = b.r + 4; b.vx = Math.abs(b.vx); }
     if (b.x > W - b.r - 4) { b.x = W - b.r - 4; b.vx = -Math.abs(b.vx); }
   }
-  // Remove off-top bubbles
+  // Off-top bubbles count as missed
   state.bubbles = state.bubbles.filter(function(b){ return b.y + b.r >= -20; });
-
-  if (state.playing) {
-    const remaining = state.bubblesToSpawn + state.bubbles.length;
-    state.attemptsUsed = state.attemptsMax - remaining;
-    updateHUD();
-  }
 
   // Particles
   for (let i = 0; i < state.particles.length; i++) {
@@ -750,19 +952,19 @@ function update(dtMs) {
       p.t = 1 - p.life / p.maxLife;
       if (p.t >= 1 && !p.applied) {
         p.applied = true;
-        applyFill(p.bIdx, p.isGolden, p.isSpecial);
+        applyFill(p.bIdx, p.isGold);
       }
     }
   }
   state.particles = state.particles.filter(function(p){ return p.life > 0; });
 
-  // Beakers
+  // Beakers update
   for (let i = 0; i < state.beakers.length; i++) {
     const bk = state.beakers[i];
     bk.displayFill += (bk.fill - bk.displayFill) * Math.min(0.18 * dt, 0.9);
     if (bk.glowT > 0) bk.glowT -= dt;
     if (bk.shakeT > 0) bk.shakeT -= dt;
-    bk.sloshPhase += 0.09 * dt;
+    bk.sloshPhase += 0.085 * dt;
     bk.sloshAmp *= Math.pow(0.93, dt);
     for (let j = 0; j < bk.sparkles.length; j++) {
       const s = bk.sparkles[j];
@@ -773,83 +975,229 @@ function update(dtMs) {
     bk.sparkles = bk.sparkles.filter(function(s){ return s.life > 0; });
   }
 
-  if (state.benchShake > 0) state.benchShake -= 0.5 * dt;
+  if (state.benchShake > 0) state.benchShake -= 0.4 * dt;
 
-  // Round end detection
-  if (state.playing) {
-    if (state.won) {
-      state.winCelebrateT += dt;
-      if (state.winCelebrateT > 90) endRound();
-    } else if (state.bubblesToSpawn === 0 && state.bubbles.length === 0 && state.particles.filter(function(p){return p.kind==='stream'&&!p.applied;}).length === 0) {
-      endRound();
+  // Steam puffs above £10 flask
+  if (Math.random() < 0.04 * dt) {
+    const bk = state.beakers[4];
+    if (bk) {
+      state.steamPuffs.push({
+        x: bk.cx + (Math.random() - 0.5) * 14,
+        y: bk.baseY - bk.h - 10,
+        r: 8 + Math.random() * 6,
+        vy: -0.5 - Math.random() * 0.4,
+        life: 90, maxLife: 90,
+        drift: (Math.random() - 0.5) * 0.4
+      });
     }
   }
+  for (let i = 0; i < state.steamPuffs.length; i++) {
+    const s = state.steamPuffs[i];
+    s.x += s.drift * dt;
+    s.y += s.vy * dt;
+    s.r += 0.3 * dt;
+    s.life -= dt;
+  }
+  state.steamPuffs = state.steamPuffs.filter(function(s){ return s.life > 0; });
 
-  // Session timer
-  const secs = Math.floor((Date.now() - state.sessionStart) / 1000);
-  const mm = String(Math.floor(secs / 60)).padStart(2, '0');
-  const ss = String(secs % 60).padStart(2, '0');
-  document.getElementById('timerVal').textContent = mm + ':' + ss;
+  // End round when no more bubbles or pending streams
+  if (state.playing && !state.finishing) {
+    const pendingStreams = state.particles.filter(function(p){return p.kind==='stream' && !p.applied;}).length;
+    if (state.bubblesToSpawn === 0 && state.bubbles.length === 0 && pendingStreams === 0) {
+      state.finishing = true;
+      updateHUD();
+      // small delay to let last fill animations resolve
+      setTimeout(endRound, 700);
+    }
+  }
 }
 
 /* -------------------- Rendering -------------------- */
 function drawBackground() {
+  // Wall (cream)
   const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0.0, '#eef6eb');
-  g.addColorStop(0.55, '#e6efe1');
-  g.addColorStop(1.0, '#dce7d7');
+  g.addColorStop(0, '#f1e0bd');
+  g.addColorStop(1, '#e6d4a4');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
-  // Chalkboard panel
-  const boardMargin = Math.min(W * 0.04, 40);
-  const boardTop = H * 0.04;
-  const boardBot = benchY - H * 0.02;
-  const boardLeft = boardMargin, boardRight = W - boardMargin;
-  ctx.save();
-  roundRect(ctx, boardLeft, boardTop, boardRight - boardLeft, boardBot - boardTop, 14);
-  ctx.fillStyle = '#3f5746';
-  ctx.fill();
-  ctx.lineWidth = 6;
-  ctx.strokeStyle = '#8a6b4a';
-  ctx.stroke();
-  ctx.clip();
-  const cg = ctx.createRadialGradient(W/2, boardTop + (boardBot-boardTop)*0.3, 20, W/2, boardTop + (boardBot-boardTop)*0.5, Math.max(W,H));
-  cg.addColorStop(0, 'rgba(255,255,255,0.06)');
-  cg.addColorStop(1, 'rgba(0,0,0,0.15)');
-  ctx.fillStyle = cg;
-  ctx.fillRect(boardLeft, boardTop, boardRight - boardLeft, boardBot - boardTop);
+  // Door silhouette (right edge)
+  ctx.fillStyle = 'rgba(0,0,0,0.06)';
+  ctx.fillRect(W - 30, 30, 18, H * 0.55);
 
-  // Chalk doodles
-  ctx.globalAlpha = 0.55;
-  ctx.strokeStyle = '#e9eee2';
-  ctx.fillStyle = '#e9eee2';
-  ctx.lineWidth = 1.5;
-  ctx.font = 'bold 16px Nunito';
-  drawBenzene(boardLeft + 60, boardTop + 70, 24);
-  ctx.fillText('H\u2082O', boardLeft + 120, boardTop + 60);
-  ctx.fillText('2H\u2082 + O\u2082 \u2192 2H\u2082O', boardLeft + 60, boardTop + 116);
-  drawChalkFlask(boardRight - 110, boardTop + 80, 32);
-  drawChalkAtom(boardRight - 60, boardTop + 150, 22);
-  ctx.fillText('CO\u2082', boardLeft + 90, boardBot - 30);
-  ctx.fillText('pH = \u2212log[H\u207A]', boardRight - 200, boardBot - 30);
-  ctx.beginPath();
-  for (let x = 0; x < 140; x++) {
-    const xx = boardLeft + 200 + x;
-    const yy = boardTop + 180 + Math.sin(x * 0.12) * 8;
-    if (x === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
-  }
-  ctx.stroke();
-  ctx.globalAlpha = 1;
-  ctx.restore();
+  // Lab coat (left)
+  drawLabCoat(W * 0.025, H * 0.10, H * 0.36);
 
-  // Background shelf silhouettes
-  drawBackShelf(boardLeft + 20, boardTop + 220, boardRight - boardLeft - 40);
+  // Hanging glassware (left top)
+  drawHangingGlass(W * 0.16, H * 0.04, H * 0.42);
 
-  // Bench
+  // Test tube rack (left mid)
+  drawTestTubeRack(W * 0.10, H * 0.18, H * 0.28);
+
+  // Chalkboard (centre back)
+  drawChalkboard();
+
+  // Bookshelf (right back)
+  drawBookshelf(W * 0.70, H * 0.16, W * 0.26, H * 0.18);
+
+  // Apparatus tubing for £250 flask (drawn early so flask sits over)
+  drawHeatingApparatus();
+
+  // Wooden shelf (mid-left)
+  drawShelf();
+
+  // Main bench at bottom
   drawBench();
+
+  // Scissor jack under £10 flask
+  drawScissorJack();
 }
 
+function drawLabCoat(x, y, h) {
+  ctx.save();
+  ctx.fillStyle = '#fdfdfd';
+  ctx.strokeStyle = '#cdc6b3';
+  ctx.lineWidth = 1.5;
+  // Hanger
+  ctx.beginPath();
+  ctx.arc(x + 24, y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#8a7a55';
+  ctx.fill();
+  // Hook
+  ctx.strokeStyle = '#8a7a55';
+  ctx.beginPath();
+  ctx.moveTo(x + 24, y - 4);
+  ctx.bezierCurveTo(x + 24, y - 14, x + 14, y - 14, x + 14, y - 6);
+  ctx.stroke();
+  // Coat shape
+  ctx.fillStyle = '#fdfdfd';
+  ctx.strokeStyle = '#cdc6b3';
+  ctx.beginPath();
+  ctx.moveTo(x + 8, y + 6);
+  ctx.lineTo(x + 40, y + 6);
+  ctx.lineTo(x + 56, y + 30);
+  ctx.lineTo(x + 50, y + h);
+  ctx.lineTo(x - 4, y + h);
+  ctx.lineTo(x - 8, y + 30);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  // Lapels
+  ctx.beginPath();
+  ctx.moveTo(x + 24, y + 6);
+  ctx.lineTo(x + 14, y + 60);
+  ctx.lineTo(x + 24, y + 90);
+  ctx.lineTo(x + 34, y + 60);
+  ctx.closePath();
+  ctx.fillStyle = '#f0ebd9';
+  ctx.fill();
+  // Buttons
+  ctx.fillStyle = '#bbb19a';
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.arc(x + 24, y + 60 + i * 24, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawHangingGlass(x, y, h) {
+  ctx.save();
+  // Stand cord
+  ctx.strokeStyle = '#5c4a2e';
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(x + 30, 0);
+  ctx.lineTo(x + 30, y + 8);
+  ctx.stroke();
+  // Round flask
+  ctx.fillStyle = 'rgba(180, 220, 210, 0.45)';
+  ctx.strokeStyle = 'rgba(80, 100, 100, 0.4)';
+  ctx.beginPath();
+  ctx.arc(x + 30, y + 30, 22, 0, Math.PI * 2);
+  ctx.fill(); ctx.stroke();
+  // Tube to side
+  ctx.beginPath();
+  ctx.moveTo(x + 50, y + 24);
+  ctx.bezierCurveTo(x + 80, y + 24, x + 80, y + 70, x + 50, y + 70);
+  ctx.stroke();
+  // Small flask
+  ctx.fillStyle = 'rgba(220, 180, 180, 0.4)';
+  ctx.beginPath();
+  ctx.moveTo(x + 16, y + 70);
+  ctx.lineTo(x + 44, y + 70);
+  ctx.lineTo(x + 50, y + 110);
+  ctx.lineTo(x + 10, y + 110);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
+function drawTestTubeRack(x, y, h) {
+  ctx.save();
+  // Rack
+  ctx.fillStyle = '#a17a4a';
+  ctx.fillRect(x, y + 90, 80, 8);
+  ctx.fillRect(x, y + 8, 80, 6);
+  ctx.fillRect(x, y + 8, 6, 90);
+  ctx.fillRect(x + 74, y + 8, 6, 90);
+  // Tubes
+  const colors = ['#e8a8c8', '#a1c5dc', '#c8e3a0', '#c5b3d9'];
+  for (let i = 0; i < 4; i++) {
+    const tx = x + 14 + i * 14;
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillRect(tx, y + 8, 8, 78);
+    // colored liquid bottom
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(tx, y + 50, 8, 36);
+    ctx.beginPath();
+    ctx.arc(tx + 4, y + 86, 4, 0, Math.PI);
+    ctx.fill();
+    // glass rim
+    ctx.strokeStyle = 'rgba(80,100,100,0.4)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(tx, y + 8, 8, 78);
+  }
+  ctx.restore();
+}
+
+function drawChalkboard() {
+  const w = W * 0.34, h = H * 0.30;
+  const x = (W - w) / 2;
+  const y = H * 0.10;
+  ctx.save();
+  // Frame
+  ctx.fillStyle = '#7a4f2c';
+  roundRect(ctx, x - 8, y - 8, w + 16, h + 16, 6);
+  ctx.fill();
+  // Board
+  ctx.fillStyle = '#3c5a4a';
+  roundRect(ctx, x, y, w, h, 4);
+  ctx.fill();
+  ctx.clip();
+  // Faint highlight
+  const cg = ctx.createRadialGradient(x + w/2, y + h/2, 30, x + w/2, y + h/2, w);
+  cg.addColorStop(0, 'rgba(255,255,255,0.05)');
+  cg.addColorStop(1, 'rgba(0,0,0,0.18)');
+  ctx.fillStyle = cg;
+  ctx.fillRect(x, y, w, h);
+  // Chalk benzene + decorations
+  ctx.globalAlpha = 0.6;
+  ctx.strokeStyle = '#dde8d7';
+  ctx.fillStyle = '#dde8d7';
+  ctx.lineWidth = 1.5;
+  ctx.font = 'bold ' + Math.max(11, Math.floor(w * 0.04)) + 'px Nunito';
+  // Big benzene ring centre
+  drawBenzene(x + w * 0.5, y + h * 0.45, Math.min(w, h) * 0.18);
+  // Side groups
+  ctx.fillText('H\u2083C', x + w * 0.18, y + h * 0.30);
+  ctx.fillText('CH\u2083', x + w * 0.78, y + h * 0.30);
+  ctx.fillText('H\u2083C', x + w * 0.20, y + h * 0.66);
+  ctx.fillText('CH\u2083', x + w * 0.78, y + h * 0.66);
+  // DNA helix (lower)
+  drawHelix(x + w * 0.5, y + h * 0.85, w * 0.25, 12);
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
 function drawBenzene(cx, cy, r) {
   ctx.beginPath();
   for (let i = 0; i < 6; i++) {
@@ -864,86 +1212,190 @@ function drawBenzene(cx, cy, r) {
   ctx.arc(cx, cy, r * 0.55, 0, Math.PI * 2);
   ctx.stroke();
 }
-function drawChalkFlask(cx, cy, s) {
-  ctx.beginPath();
-  ctx.moveTo(cx - s * 0.2, cy - s);
-  ctx.lineTo(cx + s * 0.2, cy - s);
-  ctx.lineTo(cx + s * 0.2, cy - s * 0.3);
-  ctx.lineTo(cx + s * 0.8, cy + s * 0.6);
-  ctx.lineTo(cx - s * 0.8, cy + s * 0.6);
-  ctx.lineTo(cx - s * 0.2, cy - s * 0.3);
-  ctx.closePath();
-  ctx.stroke();
-}
-function drawChalkAtom(cx, cy, r) {
-  ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI*2); ctx.fill();
-  for (let i = 0; i < 3; i++) {
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(i * Math.PI / 3);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, r, r * 0.4, 0, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-  }
-}
-function drawBackShelf(x, y, w) {
+function drawHelix(cx, cy, w, h) {
   ctx.save();
-  ctx.fillStyle = '#8a6b4a';
-  ctx.globalAlpha = 0.55;
-  ctx.fillRect(x, y, w, 6);
-  ctx.globalAlpha = 0.4;
-  const items = 6;
-  const palette = ['#aac6a4', '#d5b98f', '#cde4d0', '#b9d2e0', '#e3cbaf', '#c5b3d9'];
-  for (let i = 0; i < items; i++) {
-    const ix = x + (w / items) * (i + 0.5);
-    const iy = y;
-    ctx.fillStyle = palette[i % palette.length];
-    const type = i % 3;
-    if (type === 0) {
-      ctx.fillRect(ix - 10, iy - 28, 20, 28);
-    } else if (type === 1) {
-      ctx.beginPath();
-      ctx.moveTo(ix - 4, iy - 28);
-      ctx.lineTo(ix + 4, iy - 28);
-      ctx.lineTo(ix + 14, iy);
-      ctx.lineTo(ix - 14, iy);
-      ctx.closePath();
-      ctx.fill();
-    } else {
-      ctx.fillRect(ix - 5, iy - 32, 10, 26);
-      ctx.beginPath(); ctx.arc(ix, iy - 6, 5, 0, Math.PI*2); ctx.fill();
-    }
+  ctx.beginPath();
+  for (let i = 0; i <= 60; i++) {
+    const t = i / 60;
+    const x = cx - w/2 + w * t;
+    const y = cy + Math.sin(t * Math.PI * 4) * h;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
   }
+  ctx.stroke();
+  ctx.beginPath();
+  for (let i = 0; i <= 60; i++) {
+    const t = i / 60;
+    const x = cx - w/2 + w * t;
+    const y = cy - Math.sin(t * Math.PI * 4) * h;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  // rungs
+  for (let i = 1; i < 8; i++) {
+    const t = i / 8;
+    const x = cx - w/2 + w * t;
+    const y1 = cy + Math.sin(t * Math.PI * 4) * h;
+    const y2 = cy - Math.sin(t * Math.PI * 4) * h;
+    ctx.beginPath();
+    ctx.moveTo(x, y1); ctx.lineTo(x, y2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawBookshelf(x, y, w, h) {
+  ctx.save();
+  // Shelf board
+  ctx.fillStyle = '#a17a4a';
+  ctx.fillRect(x, y + h * 0.55, w, 4);
+  ctx.fillRect(x, y + h, w, 4);
+  // Books on top half
+  const cols = ['#a3c597','#d4b88a','#bfd0e4','#e5b39e','#c9b6dc','#9bc7c2'];
+  let cx = x + 4;
+  while (cx < x + w * 0.45) {
+    const bw = 8 + Math.random() * 4;
+    const bh = h * 0.32 - Math.random() * 6;
+    ctx.fillStyle = cols[Math.floor(Math.random() * cols.length)];
+    ctx.fillRect(cx, y + h * 0.55 - bh, bw, bh);
+    cx += bw + 1;
+  }
+  // Stacked books on top
+  ctx.fillStyle = '#d4b88a';
+  ctx.fillRect(x + w * 0.55, y + h * 0.45, 60, 8);
+  ctx.fillStyle = '#bfd0e4';
+  ctx.fillRect(x + w * 0.55, y + h * 0.45 - 8, 56, 8);
+  ctx.fillStyle = '#e5b39e';
+  ctx.fillRect(x + w * 0.55, y + h * 0.45 - 16, 50, 8);
+  // Lower shelf books
+  cx = x + 4;
+  while (cx < x + w - 6) {
+    const bw = 7 + Math.random() * 5;
+    const bh = h * 0.30 - Math.random() * 4;
+    ctx.fillStyle = cols[Math.floor(Math.random() * cols.length)];
+    ctx.fillRect(cx, y + h - bh, bw, bh);
+    cx += bw + 1;
+  }
+  ctx.restore();
+}
+
+function drawShelf() {
+  // Wooden shelf occupying left mid area, on which the first 3 beakers stand
+  ctx.save();
+  const x = shelfX1 - 8;
+  const w = (shelfX2 - shelfX1) + 16;
+  const top = shelfY;
+  // Top board
+  ctx.fillStyle = '#b4825a';
+  ctx.fillRect(x, top, w, 12);
+  // Edge highlight
+  ctx.fillStyle = 'rgba(255,235,200,0.35)';
+  ctx.fillRect(x, top, w, 3);
+  // Underside shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.18)';
+  ctx.fillRect(x, top + 12, w, 2);
+  // Vertical legs at left end (the shelf is supported from the bench upward)
+  ctx.fillStyle = '#a07150';
+  ctx.fillRect(x, top + 12, 6, benchY - top - 8);
+  ctx.fillRect(x + w - 12, top + 12, 6, benchY - top - 8);
   ctx.restore();
 }
 
 function drawBench() {
   const shakeX = state.benchShake > 0 ? (Math.random() - 0.5) * state.benchShake : 0;
   const g = ctx.createLinearGradient(0, benchY, 0, H);
-  g.addColorStop(0, '#b6855a');
-  g.addColorStop(0.35, '#9b6c42');
-  g.addColorStop(1, '#6e4a2a');
+  g.addColorStop(0, '#c08560');
+  g.addColorStop(0.4, '#a87145');
+  g.addColorStop(1, '#7d5230');
   ctx.save();
   ctx.translate(shakeX, 0);
   ctx.fillStyle = g;
   ctx.fillRect(-4, benchY, W + 8, H - benchY);
+  // Edge highlight
   ctx.fillStyle = 'rgba(255,230,190,0.35)';
   ctx.fillRect(-4, benchY, W + 8, 4);
-  ctx.fillStyle = 'rgba(0,0,0,0.2)';
+  ctx.fillStyle = 'rgba(0,0,0,0.20)';
   ctx.fillRect(-4, benchY + 10, W + 8, 2);
+  // Wood grain
   ctx.strokeStyle = 'rgba(60,30,10,0.18)';
   ctx.lineWidth = 1;
-  for (let i = 0; i < 5; i++) {
-    const y = benchY + 20 + i * ((H - benchY - 20) / 5);
+  for (let i = 0; i < 4; i++) {
+    const y = benchY + 22 + i * ((H - benchY - 22) / 4);
     ctx.beginPath();
     ctx.moveTo(0, y);
-    for (let x = 0; x <= W; x += 40) {
-      ctx.lineTo(x, y + Math.sin(x * 0.05 + i) * 1.5);
-    }
+    for (let x = 0; x <= W; x += 40) ctx.lineTo(x, y + Math.sin(x * 0.05 + i) * 1.4);
     ctx.stroke();
   }
   ctx.restore();
+}
+
+function drawScissorJack() {
+  const bk = state.beakers[4];
+  if (!bk) return;
+  // Position the jack between bk.baseY and benchY
+  const jackTop = bk.baseY;
+  const jackBot = benchY + 4;
+  const jackH = jackBot - jackTop;
+  if (jackH < 6) return;
+  const cx = bk.cx;
+  // Top and bottom plates
+  ctx.save();
+  ctx.fillStyle = '#7d5230';
+  ctx.fillRect(cx - 22, jackTop - 4, 44, 6);
+  ctx.fillRect(cx - 22, jackBot - 6, 44, 6);
+  // Scissor X bars (animated slightly)
+  const wobble = Math.sin(state.jackPhase) * 1.2;
+  ctx.strokeStyle = '#5e3d23';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx - 18, jackTop + wobble);
+  ctx.lineTo(cx + 18, jackBot - wobble);
+  ctx.moveTo(cx + 18, jackTop + wobble);
+  ctx.lineTo(cx - 18, jackBot - wobble);
+  ctx.stroke();
+  // Pivot dots
+  ctx.fillStyle = '#3d2614';
+  ctx.beginPath(); ctx.arc(cx, jackTop + jackH / 2, 2, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
+function drawHeatingApparatus() {
+  const bk = state.beakers[6];
+  if (!bk) return;
+  const cx = bk.cx;
+  const baseY = benchY + 4;
+  // Stand pole on right of flask
+  ctx.save();
+  ctx.fillStyle = '#888';
+  ctx.fillRect(cx + bk.w * 0.55, baseY - bk.h * 1.05, 4, bk.h * 1.05);
+  // Tube/pipe to flask
+  ctx.strokeStyle = '#aaa';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx + bk.w * 0.55, baseY - bk.h * 0.55);
+  ctx.bezierCurveTo(cx + bk.w * 0.40, baseY - bk.h * 0.55, cx + bk.w * 0.40, baseY - bk.h * 0.45, cx + bk.w * 0.30, baseY - bk.h * 0.45);
+  ctx.stroke();
+  // Hot plate base
+  ctx.fillStyle = '#555';
+  ctx.fillRect(cx - bk.w * 0.6, baseY - 6, bk.w * 1.2, 6);
+  ctx.fillStyle = '#888';
+  ctx.fillRect(cx - bk.w * 0.55, baseY - 10, bk.w * 1.1, 4);
+  // Glow under flask
+  ctx.fillStyle = 'rgba(255,180,90,' + (0.25 + Math.sin(state.jackPhase * 2) * 0.05) + ')';
+  ctx.beginPath();
+  ctx.ellipse(cx, baseY - 6, bk.w * 0.45, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawSteam() {
+  for (let i = 0; i < state.steamPuffs.length; i++) {
+    const s = state.steamPuffs[i];
+    const a = (s.life / s.maxLife) * 0.45;
+    ctx.fillStyle = 'rgba(240,240,240,' + a.toFixed(2) + ')';
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
 function roundRect(ctx, x, y, w, h, r) {
@@ -960,7 +1412,6 @@ function roundRect(ctx, x, y, w, h, r) {
 function drawBeakers() {
   for (let i = 0; i < state.beakers.length; i++) drawBeaker(state.beakers[i]);
 }
-
 function drawBeaker(bk) {
   const shake = bk.shakeT > 0 ? (Math.random() - 0.5) * bk.shakeT * 0.2 : 0;
   ctx.save();
@@ -971,36 +1422,38 @@ function drawBeaker(bk) {
   const topY = bk.baseY - h;
   const botY = bk.baseY;
 
+  // Glow when filled
   if (bk.glowT > 0) {
     const t = bk.glowT / 60;
     ctx.save();
-    ctx.globalAlpha = t * 0.7;
+    ctx.globalAlpha = t * 0.65;
     ctx.shadowColor = bk.color;
-    ctx.shadowBlur = 40;
+    ctx.shadowBlur = 36;
     ctx.fillStyle = bk.color;
     ctx.beginPath();
-    ctx.ellipse(0, botY - h/2, w*0.9, h*0.8, 0, 0, Math.PI*2);
+    ctx.ellipse(0, botY - h/2, w*0.9, h*0.85, 0, 0, Math.PI*2);
     ctx.fill();
     ctx.restore();
   }
 
+  // Glass shape path
   let shapePath;
   if (bk.shape === 'beaker') {
     const hw = w / 2;
     shapePath = function() {
       ctx.beginPath();
-      ctx.moveTo(-hw * 1.02, topY + 4);
+      ctx.moveTo(-hw * 1.04, topY + 4);
       ctx.lineTo(-hw * 0.96, topY + 12);
       ctx.lineTo(-hw * 0.94, botY - 8);
       ctx.quadraticCurveTo(-hw * 0.9, botY, -hw * 0.8, botY);
       ctx.lineTo(hw * 0.8, botY);
       ctx.quadraticCurveTo(hw * 0.9, botY, hw * 0.94, botY - 8);
       ctx.lineTo(hw * 0.96, topY + 12);
-      ctx.lineTo(hw * 1.02, topY + 4);
+      ctx.lineTo(hw * 1.04, topY + 4);
     };
   } else if (bk.shape === 'erlenmeyer') {
     const hw = w / 2;
-    const neckHW = hw * 0.32;
+    const neckHW = hw * 0.30;
     const neckY = topY + h * 0.20;
     shapePath = function() {
       ctx.beginPath();
@@ -1014,8 +1467,9 @@ function drawBeaker(bk) {
       ctx.lineTo(neckHW, topY);
     };
   } else {
+    // Round-bottom flask
     const hw = w / 2;
-    const neckHW = hw * 0.22;
+    const neckHW = hw * 0.20;
     const neckBottom = topY + h * 0.30;
     const bulbR = hw * 0.95;
     const bulbCY = botY - bulbR + 4;
@@ -1023,7 +1477,7 @@ function drawBeaker(bk) {
       ctx.beginPath();
       ctx.moveTo(-neckHW, topY);
       ctx.lineTo(-neckHW, neckBottom);
-      ctx.arc(0, bulbCY, bulbR, Math.PI * 0.9, Math.PI * 0.1, true);
+      ctx.arc(0, bulbCY, bulbR, Math.PI * 0.92, Math.PI * 0.08, true);
       ctx.lineTo(neckHW, topY);
     };
   }
@@ -1036,15 +1490,15 @@ function drawBeaker(bk) {
 
   const ratio = bk.displayFill / bk.segments;
   const liquidTop = botY - (botY - topY) * ratio;
-  const lg = ctx.createLinearGradient(0, liquidTop, 0, botY);
-  lg.addColorStop(0, bk.color2);
-  lg.addColorStop(1, bk.color);
-  ctx.fillStyle = lg;
-  ctx.fillRect(-w, liquidTop, w * 2, botY - liquidTop + 4);
-
-  if (ratio > 0.02) {
+  if (ratio > 0.005) {
+    const lg = ctx.createLinearGradient(0, liquidTop, 0, botY);
+    lg.addColorStop(0, bk.color2);
+    lg.addColorStop(1, bk.color);
+    ctx.fillStyle = lg;
+    ctx.fillRect(-w, liquidTop, w * 2, botY - liquidTop + 4);
+    // Sloshing surface
     ctx.beginPath();
-    const amp = Math.min(3 + bk.sloshAmp * 0.4, 6);
+    const amp = Math.min(2 + bk.sloshAmp * 0.4, 6);
     ctx.moveTo(-w, liquidTop);
     for (let x = -w; x <= w; x += 6) {
       const yy = liquidTop + Math.sin((x * 0.08) + bk.sloshPhase) * amp;
@@ -1053,38 +1507,46 @@ function drawBeaker(bk) {
     ctx.lineTo(w, botY);
     ctx.lineTo(-w, botY);
     ctx.closePath();
-    const sg = ctx.createLinearGradient(0, liquidTop - 6, 0, liquidTop + 20);
-    sg.addColorStop(0, bk.color2);
-    sg.addColorStop(1, bk.color);
-    ctx.fillStyle = sg;
+    ctx.fillStyle = bk.color;
     ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    // Surface highlight
+    ctx.fillStyle = 'rgba(255,255,255,0.30)';
     ctx.fillRect(-w * 0.4, liquidTop - 1, w * 0.8, 2);
   }
 
-  ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-  ctx.lineWidth = 1;
-  for (let i = 1; i < bk.segments; i++) {
+  // Segment lines (white)
+  ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+  ctx.lineWidth = 2;
+  for (let i = 1; i <= bk.segments; i++) {
     const y = botY - (botY - topY) * (i / bk.segments);
     ctx.beginPath();
-    ctx.moveTo(-w * 0.42, y); ctx.lineTo(-w * 0.25, y);
-    ctx.moveTo(w * 0.25, y);  ctx.lineTo(w * 0.42, y);
+    ctx.moveTo(-w * 0.46, y);
+    ctx.lineTo(w * 0.46, y);
     ctx.stroke();
   }
+  // Yellow win line at top segment
+  const winY = botY - (botY - topY) * 1.0;
+  ctx.strokeStyle = '#f7c948';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(-w * 0.46, winY + 2);
+  ctx.lineTo(w * 0.46, winY + 2);
+  ctx.stroke();
 
+  // Inner bubbles in liquid
   if (ratio > 0.05) {
     const nb = 3;
     for (let i = 0; i < nb; i++) {
       const t = ((performance.now() / 700) + i * 0.33) % 1;
       const bx = Math.sin(i * 3 + performance.now() / 900) * w * 0.25;
       const by = botY - (botY - liquidTop - 6) * t - 4;
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
       ctx.beginPath();
       ctx.arc(bx, by, 2 + (1 - t) * 2, 0, Math.PI * 2);
       ctx.fill();
     }
   }
-
+  // Sparkles at surface
   for (let i = 0; i < bk.sparkles.length; i++) {
     const s = bk.sparkles[i];
     const a = Math.max(0, s.life / s.maxLife);
@@ -1094,41 +1556,41 @@ function drawBeaker(bk) {
     ctx.fill();
   }
 
-  ctx.restore();
+  ctx.restore(); // end clip
 
   // Value label
   const labelY = liquidTop + (botY - liquidTop) * 0.55;
-  const labelVisible = ratio > 0.15;
+  const labelVisible = ratio > 0.18;
+  const labelTargetY = labelVisible ? labelY : botY - h * 0.30;
   ctx.font = '900 ' + Math.floor(w * 0.30) + 'px Nunito';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.lineWidth = 3;
   ctx.strokeStyle = 'rgba(0,0,0,0.25)';
   ctx.fillStyle = labelVisible ? '#ffffff' : 'rgba(255,255,255,0.55)';
-  const labelTargetY = labelVisible ? labelY : botY - h * 0.3;
   ctx.strokeText(bk.label, 0, labelTargetY);
   ctx.fillText(bk.label, 0, labelTargetY);
 
   // Glass outline
   shapePath();
-  ctx.strokeStyle = 'rgba(30,50,60,0.5)';
-  ctx.lineWidth = 2.2;
+  ctx.strokeStyle = 'rgba(40,55,65,0.45)';
+  ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Inner glass highlight
+  // Glass highlight
   ctx.save();
   shapePath();
   ctx.closePath();
   ctx.clip();
   const hg = ctx.createLinearGradient(-w/2, 0, w/2, 0);
   hg.addColorStop(0, 'rgba(255,255,255,0.0)');
-  hg.addColorStop(0.20, 'rgba(255,255,255,0.35)');
-  hg.addColorStop(0.30, 'rgba(255,255,255,0.0)');
+  hg.addColorStop(0.18, 'rgba(255,255,255,0.32)');
+  hg.addColorStop(0.32, 'rgba(255,255,255,0.0)');
   ctx.fillStyle = hg;
   ctx.fillRect(-w, topY, w*2, botY - topY + 6);
   const hg2 = ctx.createLinearGradient(-w/2, 0, w/2, 0);
   hg2.addColorStop(0.85, 'rgba(255,255,255,0.0)');
-  hg2.addColorStop(1.0, 'rgba(255,255,255,0.25)');
+  hg2.addColorStop(1.0, 'rgba(255,255,255,0.22)');
   ctx.fillStyle = hg2;
   ctx.fillRect(-w, topY, w*2, botY - topY + 6);
   ctx.restore();
@@ -1141,62 +1603,93 @@ function drawBubbles() {
 }
 
 function drawBubble(b) {
-  const wobbleRx = 1 + Math.sin(b.wobble) * 0.06;
-  const wobbleRy = 1 + Math.cos(b.wobble * 1.1) * 0.06;
+  const wobbleRx = 1 + Math.sin(b.wobble) * 0.05;
+  const wobbleRy = 1 + Math.cos(b.wobble * 1.1) * 0.05;
   ctx.save();
   ctx.translate(b.x, b.y);
   ctx.scale(wobbleRx, wobbleRy);
 
-  if (b.golden) {
+  // Gold plasma aura
+  if (b.isGold) {
     ctx.save();
     const glowT = (Math.sin(performance.now() / 120) + 1) / 2;
     ctx.shadowColor = '#ffe14a';
     ctx.shadowBlur = 18 + glowT * 18;
-    ctx.fillStyle = 'rgba(255, 225, 74, 0.35)';
+    ctx.fillStyle = 'rgba(255, 225, 74, 0.30)';
     ctx.beginPath();
     ctx.arc(0, 0, b.r + 6, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
-  } else if (b.special) {
-    ctx.save();
-    ctx.shadowColor = b.color;
-    ctx.shadowBlur = 14;
-    ctx.fillStyle = 'rgba(255,255,255,0.15)';
-    ctx.beginPath();
-    ctx.arc(0, 0, b.r + 3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
   }
 
-  const grad = ctx.createRadialGradient(-b.r * 0.3, -b.r * 0.4, b.r * 0.1, 0, 0, b.r);
-  grad.addColorStop(0.0, hexWithAlpha(b.color2, 0.9));
-  grad.addColorStop(0.55, hexWithAlpha(b.color, 0.7));
-  grad.addColorStop(1.0, hexWithAlpha(b.color, 0.25));
-  ctx.fillStyle = grad;
+  // Bubble body — translucent with rainbow refraction rim
   ctx.beginPath();
   ctx.arc(0, 0, b.r, 0, Math.PI * 2);
+  // Inner light fill (almost transparent white-ish)
+  const bodyGrad = ctx.createRadialGradient(-b.r * 0.3, -b.r * 0.4, b.r * 0.1, 0, 0, b.r);
+  bodyGrad.addColorStop(0, 'rgba(255,255,255,0.6)');
+  bodyGrad.addColorStop(0.55, 'rgba(255,255,255,0.18)');
+  bodyGrad.addColorStop(1, 'rgba(255,255,255,0.05)');
+  ctx.fillStyle = bodyGrad;
   ctx.fill();
 
-  ctx.lineWidth = 1.5;
-  ctx.strokeStyle = hexWithAlpha(b.color, 0.55);
+  // Rainbow rim — multiple coloured arcs offset
+  const rimColors = ['#ff7aa5', '#ffd23f', '#7ec4d6', '#a3d27c', '#b88ce8', '#ff9b6a'];
+  ctx.lineWidth = 3;
+  for (let i = 0; i < rimColors.length; i++) {
+    const phase = b.rimPhase + i * (Math.PI * 2 / rimColors.length);
+    const start = phase;
+    const end = phase + Math.PI / 3.2;
+    ctx.strokeStyle = hexWithAlpha(rimColors[i], 0.55);
+    ctx.beginPath();
+    ctx.arc(0, 0, b.r - 1.2, start, end);
+    ctx.stroke();
+  }
+  // Outer glass edge
+  ctx.lineWidth = 1.4;
+  ctx.strokeStyle = 'rgba(70,90,100,0.28)';
+  ctx.beginPath();
+  ctx.arc(0, 0, b.r, 0, Math.PI * 2);
   ctx.stroke();
 
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
+  // Specular highlights
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
   ctx.beginPath();
-  ctx.ellipse(-b.r * 0.35, -b.r * 0.45, b.r * 0.22, b.r * 0.14, -0.5, 0, Math.PI * 2);
+  ctx.ellipse(-b.r * 0.36, -b.r * 0.46, b.r * 0.22, b.r * 0.13, -0.5, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = 'rgba(255,255,255,0.55)';
   ctx.beginPath();
-  ctx.arc(b.r * 0.25, b.r * 0.35, b.r * 0.08, 0, Math.PI * 2);
+  ctx.arc(b.r * 0.3, b.r * 0.35, b.r * 0.07, 0, Math.PI * 2);
   ctx.fill();
 
-  if (b.golden) {
-    ctx.fillStyle = '#fff6c0';
-    ctx.font = '900 ' + Math.floor(b.r) + 'px Nunito';
+  // Inner colored payload blob (visible inside bubble before pop)
+  if (b.colorIdx >= 0) {
+    const blobR = b.r * 0.36;
+    const ox = Math.sin(b.blobJiggle) * b.r * 0.10;
+    const oy = Math.cos(b.blobJiggle * 1.1) * b.r * 0.10;
+    const bg = ctx.createRadialGradient(ox - blobR * 0.3, oy - blobR * 0.4, blobR * 0.2, ox, oy, blobR);
+    bg.addColorStop(0, b.color2);
+    bg.addColorStop(1, b.color);
+    ctx.fillStyle = bg;
+    ctx.beginPath();
+    ctx.arc(ox, oy, blobR, 0, Math.PI * 2);
+    ctx.fill();
+    // tiny highlight
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.beginPath();
+    ctx.arc(ox - blobR * 0.35, oy - blobR * 0.4, blobR * 0.18, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Gold star marker
+  if (b.isGold) {
+    ctx.fillStyle = '#fff5b8';
+    ctx.font = '900 ' + Math.floor(b.r * 0.95) + 'px Nunito';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText('\u2605', 0, 1);
   }
+
   ctx.restore();
 }
 
@@ -1220,10 +1713,14 @@ function drawParticles() {
       const t = Math.min(1, p.t);
       const x = (1-t)*(1-t)*p.x + 2*(1-t)*t*p.cx + t*t*p.tx;
       const y = (1-t)*(1-t)*p.y + 2*(1-t)*t*p.cy + t*t*p.ty;
-      ctx.fillStyle = hexWithAlpha(p.color, 0.9);
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, 8);
+      grad.addColorStop(0, p.color2 || p.color);
+      grad.addColorStop(1, p.color);
+      ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.arc(x, y, 5, 0, Math.PI * 2);
       ctx.fill();
+      // Trail droplets
       ctx.fillStyle = hexWithAlpha(p.color, 0.45);
       for (let k = 1; k <= 4; k++) {
         const tt = Math.max(0, t - k * 0.05);
@@ -1254,6 +1751,7 @@ function frame(now) {
   ctx.clearRect(0, 0, W, H);
   drawBackground();
   drawBeakers();
+  drawSteam();
   drawBubbles();
   drawParticles();
 
@@ -1265,7 +1763,7 @@ resize();
 updateHUD();
 requestAnimationFrame(function(t){ lastT = t; frame(t); });
 
-// First interaction unlocks audio
+// Audio unlock
 window.addEventListener('pointerdown', ensureAudio, { once: true });
 window.addEventListener('keydown', ensureAudio, { once: true });
 
