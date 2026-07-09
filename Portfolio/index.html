@@ -5,10 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joshua Pinder | Computing Portfolio</title>
   <meta name="description" content="Computing portfolio of Joshua Pinder — full-stack, backend systems, and mobile development." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Joshua Pinder | Computing Portfolio" />
+  <meta property="og:description" content="Computing portfolio of Joshua Pinder — full-stack, backend systems, and mobile development." />
+  <meta property="og:site_name" content="Joshua Pinder Portfolio" />
+  <meta property="og:image" content="assets/social-preview.svg" />
+  <meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Joshua Pinder | Computing Portfolio" />
+  <meta name="twitter:description" content="Computing portfolio of Joshua Pinder — full-stack, backend systems, and mobile development." />
+  <meta name="twitter:image" content="assets/social-preview.svg" />
+  <meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="theme-color" content="#081714" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="antialiased">
+<body>
 <header>
   <div class="container nav">
     <div class="brand">
@@ -25,48 +37,50 @@
 </header>
 
 <main class="container">
-  <section class="hero motion-safe:animate-[fade-in-up_0.7s_ease-out_forwards] motion-reduce:animate-none">
+  <section class="hero hero-intro">
     <div class="card pad">
-      <h1>Computing student focused on <span class="bg-gradient-to-r from-indigo-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent font-semibold">full-stack</span>, backend systems & mobile apps.</h1>
+      <h1>Computing student specialising in <span class="gradient-accent-text">backend development</span> and full-stack mobile delivery.</h1>
       <p class="muted">
-        I build practical software with a focus on clean architecture, security-minded decisions, and solid fundamentals.
+        I enjoy building practical backend systems and shipping products people actually use. One recent example is Wyttle, where I helped deliver a full-stack mobile app that is now live on the App Store and Google Play.
       </p>
 
       <div class="pillrow" style="margin-top: 14px;">
         <a class="button" href="projects.html">Browse projects</a>
-        <button class="button" data-copy-email="joshua.pinder@example.com" title="Update this email in index.html">Copy email</button>
+        <button class="button" data-copy-email="JoshuaPinder03@gmail.com" title="Copy my email address">Copy email</button>
         <a class="button" href="https://github.com/JoshuaPinder" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="button" href="mailto:JoshuaPinder03@gmail.com?subject=CV%20request%20-%20Joshua%20Pinder">Request CV (PDF)</a>
       </div>
 
       <div class="kv">
         <div class="k">
-          <strong>Strengths</strong>
-          <span>Backend + architecture</span>
+          <strong>Specialisation</strong>
+          <span>Backend development</span>
         </div>
         <div class="k">
-          <strong>Also comfortable with</strong>
-          <span>Frontend & mobile UI</span>
+          <strong>Recent focus</strong>
+          <span>Full-stack mobile delivery</span>
         </div>
       </div>
 
       <div class="notice" style="margin-top: 14px;">
-        Tip: Contact me via the email button below to avoid typos and to learn more!
+        If you want to discuss architecture choices, implementation decisions, or project trade-offs, I am always happy to chat.
       </div>
     </div>
 
     <div class="card pad">
       <h2>Quick snapshot</h2>
-      <p class="muted small">A compact summary for recruiters who skim.</p>
+      <p class="muted small">Core tools and technologies I use most often.</p>
 
       <div style="margin-top: 12px;">
         <div class="stack">
-          <span class="chip">C++ / SFML</span>
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">React / TypeScript</span>
-          <span class="chip">Expo</span>
-          <span class="chip">Android (Java)</span>
-          <span class="chip">HTML/CSS/JS</span>
+          <span class="chip">C++17 / SFML</span>
+          <span class="chip">Python services</span>
+          <span class="chip">SQL schema design</span>
+          <span class="chip">React + TypeScript</span>
+          <span class="chip">React Native (Expo)</span>
+          <span class="chip">Android SDK (Java)</span>
+          <span class="chip">SQLite + REST integration</span>
+          <span class="chip">Vanilla HTML/CSS/JS</span>
           <span class="chip">Security & Networking</span>
         </div>
       </div>
@@ -74,7 +88,7 @@
       <div style="margin-top: 16px;">
         <h3 style="margin-bottom: 6px;">What I like building</h3>
         <p class="muted">
-          Apps with real users, clear data models, authentication, and features that need good system design.
+          Apps with real users, clear data models, role-based auth, API integrations, and features that need deliberate system design.
         </p>
       </div>
     </div>
@@ -93,12 +107,13 @@
             <h3>Wyttle</h3>
             <div class="muted small">Group project • Full-stack mobile</div>
           </div>
-          <span class="tag motion-safe:animate-[soft-glow_2.4s_ease-in-out_infinite_alternate] motion-reduce:animate-none">Flagship</span>
+          <span class="tag soft-glow-tag">Flagship</span>
         </div>
         <div class="stack">
-          <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Expo</span><span class="chip">Database</span>
+          <span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span><span class="chip">Auth + messaging flows</span><span class="chip">Token interactions</span>
         </div>
-        <p>Mentoring + peer-matching platform with secure auth, discovery flows, messaging, and token-based interactions.</p>
+        <p>Now live on App Store + Google Play. As Project Manager + Backend Lead, I shipped auth, discovery, messaging, and admin workflows and continue supporting growth past 200 members.</p>
+        <p class="impact">Impact: Live on iOS and Android with 200+ members and daily growth.</p>
         <div class="actions">
           <a class="button primary" href="project-wyttle.html">Read more</a>
           <a class="button" href="projects.html#wyttle">On Projects page</a>
@@ -116,9 +131,10 @@
           <span class="tag">Backend</span>
         </div>
         <div class="stack">
-          <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Microservices</span>
+          <span class="chip">Python APIs</span><span class="chip">SQL (DB-per-service)</span><span class="chip">Microservice boundaries</span><span class="chip">HTTP contracts</span>
         </div>
-        <p>Implemented microservices with dedicated databases and clean service boundaries for a data-driven wellbeing application.</p>
+        <p>I built the ProfileService microservice end to end, including database design, secure role-aware endpoints, and Docker deployment.</p>
+        <p class="impact">Result: Dockerised service verified through Swagger and direct SQL validation.</p>
         <div class="actions">
           <a class="button primary" href="project-trail-microservices.html">Read more</a>
           <a class="button" href="https://github.com/UoP-COMP2001/cw2-microservice-implementation-JoshuaPinder" target="_blank" rel="noreferrer">Repo</a>
@@ -136,9 +152,10 @@
           <span class="tag">Mobile</span>
         </div>
         <div class="stack">
-          <span class="chip">Java</span><span class="chip">Android</span><span class="chip">SQLite</span><span class="chip">REST API</span>
+          <span class="chip">Java + Android SDK</span><span class="chip">Role-based UX</span><span class="chip">SQLite persistence</span><span class="chip">REST API + notifications</span>
         </div>
-        <p>Two user roles (staff/guest), local data storage, and notifications for reservation and menu updates.</p>
+        <p>I designed and implemented role-based staff/guest workflows, then refined the UI using usability feedback from test participants.</p>
+        <p class="impact">Result: Usability findings translated into clearer booking actions and confirmations.</p>
         <div class="actions">
           <a class="button primary" href="project-restaurant-app.html">Read more</a>
           <a class="button" href="https://github.com/Plymouth-COMP2000/design-exercises-JoshuaPinder" target="_blank" rel="noreferrer">Repo</a>
@@ -156,12 +173,40 @@
           <span class="tag">Security</span>
         </div>
         <div class="stack">
-          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+          <span class="chip">Vanilla JavaScript SPA</span><span class="chip">HTML/CSS UI</span><span class="chip">Client-side validation</span><span class="chip">Password health checks</span>
         </div>
-        <p>Local-only single-page password manager with secure generation, validation, and a clean UI.</p>
+        <p>Built as a browser-only SPA with custom password generation, saved entries, and live health checks under frontend-only constraints.</p>
+        <p class="impact">Result: End-to-end SPA tested and verified across Chrome, Edge, and Firefox.</p>
         <div class="actions">
           <a class="button primary" href="project-password-manager.html">Read more</a>
           <a class="button" href="https://github.com/JoshuaPinder/Comp1004-Password-WebAPP" target="_blank" rel="noreferrer">Repo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sectionhead" id="spare-time-web-apps">
+    <h2>Spare-time web apps</h2>
+    <a href="projects.html#spare-time-web-apps">See all →</a>
+  </div>
+
+  <section class="grid">
+    <div class="col-6">
+      <div class="project">
+        <div class="top">
+          <div>
+            <h3>The Lab (Bubble Project)</h3>
+            <div class="muted small">Personal project • Interactive web app</div>
+          </div>
+          <span class="tag">Web App</span>
+        </div>
+        <div class="stack">
+          <span class="chip">Canvas rendering</span><span class="chip">Vanilla JavaScript</span><span class="chip">Game loop logic</span><span class="chip">Audio feedback</span>
+        </div>
+        <p>A chemistry-themed bubble game I built in my spare time with custom visuals, particles, and responsive controls.</p>
+        <p class="impact">Result: Responsive desktop/mobile controls with quick session-based gameplay loops.</p>
+        <div class="actions">
+          <a class="button primary" href="bubble.html" target="_blank" rel="noreferrer">Try it live</a>
         </div>
       </div>
     </div>
@@ -173,10 +218,12 @@
 
   <div class="card pad">
     <p class="muted">
-      Update the email + add LinkedIn when ready. Keep contact simple: email + GitHub is enough to start.
+      Open to software engineering opportunities. Reach me by email, connect on LinkedIn, and review my code on GitHub.
     </p>
     <div class="pillrow" style="margin-top: 10px;">
-      <a class="button primary" href="mailto:joshuapinder03@gmail.com">Email me</a>
+      <a class="button primary" href="mailto:JoshuaPinder03@gmail.com">Email me</a>
+      <a class="button" href="mailto:JoshuaPinder03@gmail.com?subject=CV%20request%20-%20Joshua%20Pinder">Request CV (PDF)</a>
+      <a class="button" href="https://www.linkedin.com/in/joshua-pinder-8b733a371/" target="_blank" rel="noreferrer">LinkedIn</a>
       <a class="button" href="https://github.com/JoshuaPinder" target="_blank" rel="noreferrer">GitHub</a>
     </div>
   </div>

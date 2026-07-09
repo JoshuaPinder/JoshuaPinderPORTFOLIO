@@ -4,10 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Joshua Pinder</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Project portfolio of Joshua Pinder featuring shipped mobile work, backend microservices, and practical software engineering coursework." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Projects | Joshua Pinder" />
+  <meta property="og:description" content="Project portfolio of Joshua Pinder featuring shipped mobile work, backend microservices, and practical software engineering coursework." />
+  <meta property="og:site_name" content="Joshua Pinder Portfolio" />
+  <meta property="og:image" content="assets/social-preview.svg" />
+  <meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Projects | Joshua Pinder" />
+  <meta name="twitter:description" content="Project portfolio of Joshua Pinder featuring shipped mobile work, backend microservices, and practical software engineering coursework." />
+  <meta name="twitter:image" content="assets/social-preview.svg" />
+  <meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="theme-color" content="#081714" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="antialiased">
+<body>
 <header>
   <div class="container nav">
     <div class="brand">
@@ -26,8 +39,12 @@
   <div class="card pad">
     <h1>Projects</h1>
     <p class="muted">
-      Curated selection of university work across full-stack, backend architecture, mobile development, and low-level systems.
+      A mix of university coursework, shipped products, and personal builds across backend architecture, mobile delivery, and systems fundamentals.
     </p>
+    <div class="pillrow" style="margin-top: 10px;">
+      <a class="button" href="mailto:JoshuaPinder03@gmail.com?subject=CV%20request%20-%20Joshua%20Pinder">Request CV (PDF)</a>
+      <a class="button" href="index.html#contact">Contact</a>
+    </div>
   </div>
 
   <div class="sectionhead">
@@ -43,9 +60,13 @@
             <h3>Wyttle</h3>
             <div class="muted small">Group • Full-stack mobile</div>
           </div>
-          <span class="tag motion-safe:animate-[soft-glow_2.4s_ease-in-out_infinite_alternate] motion-reduce:animate-none">Flagship</span>
+          <span class="tag soft-glow-tag">Flagship</span>
         </div>
-        <p>Mentoring + peer matching app with secure communication, discovery, and token-based interactions.</p>
+        <div class="stack">
+          <span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span><span class="chip">Auth + messaging</span><span class="chip">Token interactions</span>
+        </div>
+        <p>Now live on App Store + Google Play. As Project Manager + Backend Lead, I built core auth, discovery, message-thread, and admin flows; the app has grown to 200 members and rising.</p>
+        <p class="impact">Impact: Live release with 200+ members and active university rollout.</p>
         <div class="actions">
           <a class="button primary" href="project-wyttle.html">Details</a>
         </div>
@@ -61,7 +82,11 @@
           </div>
           <span class="tag">Backend</span>
         </div>
-        <p>Microservices with dedicated databases and clean boundaries for a data-driven wellbeing application.</p>
+        <div class="stack">
+          <span class="chip">Python APIs</span><span class="chip">SQL per service</span><span class="chip">REST contracts</span><span class="chip">Boundary design</span>
+        </div>
+        <p>Microservices with dedicated databases, API contracts, and explicit ownership boundaries for a data-driven wellbeing application.</p>
+        <p class="impact">Result: ProfileService shipped as a Dockerised service with role-aware endpoint controls.</p>
         <div class="actions">
           <a class="button primary" href="project-trail-microservices.html">Details</a>
           <a class="button" href="https://github.com/UoP-COMP2001/cw2-microservice-implementation-JoshuaPinder" target="_blank" rel="noreferrer">Repo</a>
@@ -78,7 +103,11 @@
           </div>
           <span class="tag">Mobile</span>
         </div>
-        <p>Staff/guest roles, local SQLite storage, REST API integration, and notifications.</p>
+        <div class="stack">
+          <span class="chip">Java + Android SDK</span><span class="chip">SQLite</span><span class="chip">REST integration</span><span class="chip">Notification flows</span>
+        </div>
+        <p>Staff/guest role flows, reliable local persistence, REST API integration, and notification controls for booking updates.</p>
+        <p class="impact">Result: Usability feedback directly informed clearer booking and notification interactions.</p>
         <div class="actions">
           <a class="button primary" href="project-restaurant-app.html">Details</a>
           <a class="button" href="https://github.com/Plymouth-COMP2000/design-exercises-JoshuaPinder" target="_blank" rel="noreferrer">Repo</a>
@@ -95,7 +124,11 @@
           </div>
           <span class="tag">Security</span>
         </div>
-        <p>Local-only SPA with secure password generation, validation, and password health checks.</p>
+        <div class="stack">
+          <span class="chip">Vanilla JavaScript</span><span class="chip">HTML/CSS</span><span class="chip">Validation logic</span><span class="chip">Password health checks</span>
+        </div>
+        <p>Local-only SPA with secure password generation, validation, and client-side password health analysis.</p>
+        <p class="impact">Result: Browser-only architecture validated across Chrome, Edge, and Firefox.</p>
         <div class="actions">
           <a class="button primary" href="project-password-manager.html">Details</a>
           <a class="button" href="https://github.com/JoshuaPinder/Comp1004-Password-WebAPP" target="_blank" rel="noreferrer">Repo</a>
@@ -106,7 +139,7 @@
 
   <div class="sectionhead">
     <h2>Web & Applications</h2>
-    <span class="muted small">Good “product” projects</span>
+    <span class="muted small">Coursework and practical builds</span>
   </div>
 
   <section class="grid">
@@ -119,9 +152,12 @@
           </div>
           <span class="tag">Game</span>
         </div>
+        <div class="stack">
+          <span class="chip">C++17</span><span class="chip">SFML rendering</span><span class="chip">Procedural generation</span><span class="chip">Save/load state</span>
+        </div>
         <p>Graphical maze game with procedural generation, themes, increasing difficulty, and save/load state.</p>
         <div class="actions">
-          <a class="button" href="#">Add screenshots later</a>
+          <a class="button" href="mailto:JoshuaPinder03@gmail.com?subject=Mystery%20Maze%20walkthrough">Request gameplay walkthrough</a>
         </div>
       </div>
     </div>
@@ -135,9 +171,39 @@
           </div>
           <span class="tag">Design</span>
         </div>
+        <div class="stack">
+          <span class="chip">Network segmentation</span><span class="chip">IP planning</span><span class="chip">Risk controls</span><span class="chip">Security rationale</span>
+        </div>
         <p>Secure network design proposal for a healthcare branch: segmentation, IP plan, and security rationale.</p>
         <div class="actions">
-          <a class="button" href="#">Upload report later</a>
+          <a class="button" href="mailto:JoshuaPinder03@gmail.com?subject=Cyber%20Security%20Network%20Proposal%20report">Request report PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sectionhead" id="spare-time-web-apps">
+    <h2>Spare-time web apps</h2>
+    <span class="muted small">Interactive projects built for fun</span>
+  </div>
+
+  <section class="grid">
+    <div class="col-6">
+      <div class="project">
+        <div class="top">
+          <div>
+            <h3>The Lab (Bubble Project)</h3>
+            <div class="muted small">Personal project • Browser game</div>
+          </div>
+          <span class="tag">Web App</span>
+        </div>
+        <div class="stack">
+          <span class="chip">Vanilla JavaScript</span><span class="chip">Canvas rendering</span><span class="chip">Custom particles</span><span class="chip">Procedural audio</span>
+        </div>
+        <p>A fast-paced bubble-popping game with custom animations, beaker mechanics, and responsive controls for desktop and mobile play.</p>
+        <p class="impact">Result: Touch-assisted controls and session feedback make short plays easy on mobile.</p>
+        <div class="actions">
+          <a class="button primary" href="bubble.html" target="_blank" rel="noreferrer">Try the app</a>
         </div>
       </div>
     </div>
@@ -158,6 +224,9 @@
           </div>
           <span class="tag">Assembly</span>
         </div>
+        <div class="stack">
+          <span class="chip">C logic analysis</span><span class="chip">MASM translation</span><span class="chip">Integer division</span>
+        </div>
         <p>Converted C loop logic into MASM without simplification, using integer division and array indexing.</p>
       </div>
     </div>
@@ -171,6 +240,9 @@
           </div>
           <span class="tag">C</span>
         </div>
+        <div class="stack">
+          <span class="chip">C</span><span class="chip">Gaussian blur</span><span class="chip">Sobel edge detection</span><span class="chip">Memory handling</span>
+        </div>
         <p>Batch-processed 31 images, outputting Gaussian blur + Sobel edge detection results with efficient memory usage.</p>
       </div>
     </div>
@@ -183,6 +255,9 @@
             <div class="muted small">COMP1003</div>
           </div>
           <span class="tag">C#</span>
+        </div>
+        <div class="stack">
+          <span class="chip">C# fundamentals</span><span class="chip">Tree operations</span><span class="chip">Correctness focus</span>
         </div>
         <p>Implemented a BST in a constrained “C-core only” environment, focusing on fundamentals and correctness.</p>
       </div>

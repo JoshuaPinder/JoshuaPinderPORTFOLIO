@@ -2,8 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>The Lab</title>
+<meta name="description" content="The Lab bubble game by Joshua Pinder — a browser-based interactive web app built with canvas rendering and custom game logic." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The Lab | Joshua Pinder" />
+<meta property="og:description" content="The Lab bubble game by Joshua Pinder — a browser-based interactive web app built with canvas rendering and custom game logic." />
+<meta property="og:site_name" content="Joshua Pinder Portfolio" />
+<meta property="og:image" content="assets/social-preview.svg" />
+<meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="The Lab | Joshua Pinder" />
+<meta name="twitter:description" content="The Lab bubble game by Joshua Pinder — a browser-based interactive web app built with canvas rendering and custom game logic." />
+<meta name="twitter:image" content="assets/social-preview.svg" />
+<meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+<meta name="theme-color" content="#081714" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
@@ -83,6 +97,25 @@
     font-size: 12px; font-weight: 700;
     color: rgba(40,30,20,0.65);
   }
+  .controls-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: rgba(42,38,34,0.78);
+    background: rgba(255,255,255,0.52);
+    border: 1px solid rgba(255,255,255,0.62);
+    border-radius: 999px;
+    padding: 4px 10px;
+    max-width: min(92vw, 560px);
+    text-align: center;
+    backdrop-filter: blur(2px);
+  }
 
   .canvas-wrap { flex: 1 1 auto; position: relative; min-height: 0; }
   #game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
@@ -95,7 +128,7 @@
     border-top: 2px solid rgba(0,0,0,0.18);
     display: flex; align-items: center; justify-content: center;
     gap: 8px;
-    padding: 0 10px;
+    padding: 0 10px env(safe-area-inset-bottom, 0px);
     z-index: 6;
   }
   .info-pill {
@@ -182,6 +215,22 @@
     display: flex; align-items: center; justify-content: center;
   }
   .settings-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.28); }
+  .home-btn {
+    height: 46px;
+    padding: 0 14px;
+    border-radius: 23px;
+    background: #f6f0e0;
+    color: #2a1248;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.28);
+    display: flex; align-items: center; justify-content: center;
+    flex: 0 0 auto;
+    font-family: inherit;
+    line-height: 1;
+  }
+  .home-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.28); }
 
   /* Win pill animation */
   .info-pill.win-flash {
@@ -248,29 +297,54 @@
     cursor: pointer; color: #ce4658;
   }
 
-  @media (max-width: 600px) {
-    .info-pill { min-width: 80px; font-size: 11px; padding: 8px 10px; }
-    .buy-btn { width: 60px; height: 60px; font-size: 11px; }
-    .stake-btn, .settings-btn, .round-timer { width: 38px; height: 38px; font-size: 20px; }
-    .round-timer { font-size: 11px; }
+  @media (max-width: 600px) and (orientation: portrait) {
+    .controls-hint {
+      font-size: 10px;
+      padding: 3px 8px;
+      bottom: 6px;
+      max-width: 94vw;
+    }
+    .info-pill { min-width: 92px; font-size: 11px; padding: 8px 10px; }
+    .buy-btn { width: 56px; height: 56px; font-size: 11px; }
+    .stake-btn, .settings-btn, .round-timer { width: 36px; height: 36px; font-size: 18px; }
+    .home-btn { height: 36px; font-size: 10px; padding: 0 10px; border-radius: 18px; }
+    .round-timer { font-size: 10px; }
     .brand .accent { font-size: 22px; }
     .brand .top { font-size: 11px; }
-    .controls { gap: 5px; padding: 0 5px; height: 70px; }
+    .controls {
+      gap: 6px;
+      row-gap: 6px;
+      padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px));
+      min-height: 96px;
+      height: auto;
+      flex-wrap: wrap;
+    }
+    #roundTimer { order: 1; }
+    #minus { order: 2; }
+    #buy { order: 3; }
+    #plus { order: 4; }
+    #settingsBtn { order: 5; }
+    #leftPill { order: 6; }
+    #balancePill { order: 7; }
+    .home-btn { order: 8; }
     .header { height: 56px; }
   }
 
   @media (orientation: landscape) and (max-height: 500px) {
     .header { display: none; }
+    .controls-hint { display: none; }
     .controls { height: 64px; gap: 8px; }
     .info-pill { min-width: 130px; font-size: 13px; padding: 9px 16px; }
     .hud-overlay { top: 4px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
     .stake-btn, .settings-btn, .round-timer { width: 42px; height: 42px; }
+    .home-btn { height: 42px; font-size: 12px; padding: 0 12px; border-radius: 21px; }
     .buy-btn { width: 64px; height: 64px; font-size: 13px; }
   }
 
   @media (orientation: landscape) and (max-height: 380px) {
     .controls { height: 56px; }
     .stake-btn, .settings-btn, .round-timer { width: 38px; height: 38px; font-size: 18px; }
+    .home-btn { height: 38px; font-size: 10px; padding: 0 9px; border-radius: 19px; }
     .buy-btn { width: 56px; height: 56px; font-size: 11px; }
     .info-pill { min-width: 110px; font-size: 12px; padding: 7px 12px; }
   }
@@ -295,6 +369,7 @@
         <span id="sessionTime">session time: --:--</span>
         <span id="sessionBalance">session balance: 0p</span>
       </div>
+      <div class="controls-hint" id="controlsHint" aria-hidden="true"></div>
     </div>
 
     <div class="controls">
@@ -305,6 +380,7 @@
       <button class="stake-btn" id="plus" aria-label="Increase stake">+</button>
       <div class="info-pill balance-pill" id="balancePill">Balance 0p</div>
       <button class="settings-btn" id="settingsBtn" aria-label="Settings">&#9881;</button>
+      <a class="home-btn" href="index.html" aria-label="Back to portfolio">← Portfolio</a>
     </div>
 
     <div id="toast"></div>
@@ -371,6 +447,13 @@ const BEAKER_DEFS = [
 const BUBBLE_WEIGHTS = [0.28, 0.20, 0.14, 0.10, 0.07, 0.04, 0.012, 0.158]; // last = miss (~16%)
 
 const STAKES = [0.10, 0.20, 0.50, 1.00, 2.00];
+const IS_COARSE_POINTER = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+const controlsHintEl = document.getElementById('controlsHint');
+if (controlsHintEl) {
+  controlsHintEl.textContent = IS_COARSE_POINTER
+    ? 'Tap bubbles • hold Buy to auto-pop • near-tap assist enabled'
+    : 'Click bubbles • hold Buy to auto-pop • Space = buy/hold • P = pop all';
+}
 
 const state = {
   balance: 10.00,
@@ -390,6 +473,10 @@ const state = {
   pointerEnabled: false,
   jackPhase: 0,
   steamPuffs: [],
+  roundPopped: 0,
+  roundMisses: 0,
+  roundDirectHits: 0,
+  roundNearHits: 0,
   sessionStartMs: Date.now()
 };
 
@@ -702,6 +789,7 @@ function spawnBubble() {
 function popBubble(b) {
   if (b.popped) return;
   b.popped = true;
+  state.roundPopped++;
 
   // Burst particles
   const pCount = 8 + Math.floor(b.r / 6);
@@ -730,6 +818,7 @@ function popBubble(b) {
 
   // If miss, no payload
   if (b.colorIdx < 0) {
+    state.roundMisses++;
     playPop(b.r);
     removeBubble(b);
     return;
@@ -879,6 +968,10 @@ function startRound() {
   state.bubblesToSpawn = 26;
   state.spawnCooldown = 0;
   state.totalWin = 0;
+  state.roundPopped = 0;
+  state.roundMisses = 0;
+  state.roundDirectHits = 0;
+  state.roundNearHits = 0;
   state.bubbles = [];
   state.particles = [];
   // Reset beakers, refresh prizes from current stake
@@ -894,22 +987,35 @@ function endRound() {
 
   // Tally wins from filled beakers
   let total = 0;
+  let filledBeakers = 0;
+  let highestFilledPrize = 0;
   for (let i = 0; i < state.beakers.length; i++) {
     const bk = state.beakers[i];
     if (bk.fill >= bk.segments && !bk.paid) {
       bk.paid = true;
+      filledBeakers++;
       total += bk.prize;
+      highestFilledPrize = Math.max(highestFilledPrize, bk.prize);
     }
   }
+  const hitRate = state.roundPopped > 0
+    ? Math.round(((state.roundPopped - state.roundMisses) / state.roundPopped) * 100)
+    : 0;
+  const popStats = state.roundPopped > 0
+    ? hitRate + '% colour accuracy • ' + state.roundDirectHits + ' direct' +
+      (state.roundNearHits > 0 ? ' • ' + state.roundNearHits + ' assisted' : '')
+    : 'Try again!';
   if (total > 0) {
     state.totalWin = total;
     state.balance += total;
-    showToast('YOU WIN ' + formatPrize(total) + '!', 'Beakers filled', 2400);
+    const summary = filledBeakers + ' beaker' + (filledBeakers === 1 ? '' : 's') +
+      ' filled • top ' + formatPrize(highestFilledPrize) + ' • ' + popStats;
+    showToast('YOU WIN ' + formatPrize(total) + '!', summary, 2800);
     playWinJingle(total);
     flashWinPill();
   } else {
     state.totalWin = 0;
-    showToast('No win', 'Try again!', 1300);
+    showToast('No win', popStats, 1700);
     playLoseSound();
   }
   updateHUD();
@@ -939,13 +1045,27 @@ canvas.addEventListener('pointerdown', function(e) {
   const rect = canvas.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
+  const tapPadding = IS_COARSE_POINTER ? 16 : 6;
+  const nearAssistPadding = 26;
+  let nearest = null;
+  let nearestDistSq = Infinity;
   for (let i = state.bubbles.length - 1; i >= 0; i--) {
     const b = state.bubbles[i];
     const dx = x - b.x, dy = y - b.y;
-    if (dx*dx + dy*dy <= (b.r + 4) * (b.r + 4)) {
+    const distSq = dx*dx + dy*dy;
+    if (distSq <= (b.r + tapPadding) * (b.r + tapPadding)) {
+      state.roundDirectHits++;
       popBubble(b);
-      break;
+      return;
     }
+    if (IS_COARSE_POINTER && distSq <= (b.r + nearAssistPadding) * (b.r + nearAssistPadding) && distSq < nearestDistSq) {
+      nearest = b;
+      nearestDistSq = distSq;
+    }
+  }
+  if (nearest) {
+    state.roundNearHits++;
+    popBubble(nearest);
   }
 });
 
@@ -995,6 +1115,46 @@ buyBtn.addEventListener('pointerleave', function(){
 });
 buyBtn.addEventListener('pointercancel', function(){
   if (state.holding) holdStop();
+});
+document.addEventListener('keydown', function(e){
+  const tag = (e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '');
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  if (e.code === 'Space') {
+    ensureAudio();
+    e.preventDefault();
+    if (!state.playing) {
+      startRound();
+    } else if (!state.finishing && !state.holding) {
+      holdStart();
+    }
+    return;
+  }
+  if (!state.playing && (e.code === 'ArrowRight' || e.code === 'ArrowUp')) {
+    e.preventDefault();
+    if (state.stakeIdx < STAKES.length - 1) {
+      state.stakeIdx++;
+      layoutScene();
+      updateHUD();
+    }
+    return;
+  }
+  if (!state.playing && (e.code === 'ArrowLeft' || e.code === 'ArrowDown')) {
+    e.preventDefault();
+    if (state.stakeIdx > 0) {
+      state.stakeIdx--;
+      layoutScene();
+      updateHUD();
+    }
+    return;
+  }
+  if (state.playing && (e.key === 'p' || e.key === 'P')) {
+    e.preventDefault();
+    for (let i = state.bubbles.length - 1; i >= 0; i--) popBubble(state.bubbles[i]);
+    state.bubblesToSpawn = 0;
+  }
+});
+document.addEventListener('keyup', function(e){
+  if (e.code === 'Space' && state.holding) holdStop();
 });
 
 // Pop all bubbles

@@ -4,10 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trail App Microservices | Joshua Pinder</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Trail App ProfileService microservice project by Joshua Pinder using FastAPI, SQL Server, role-based access, and Docker deployment." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Trail App Microservices | Joshua Pinder" />
+  <meta property="og:description" content="Trail App ProfileService microservice project by Joshua Pinder using FastAPI, SQL Server, role-based access, and Docker deployment." />
+  <meta property="og:site_name" content="Joshua Pinder Portfolio" />
+  <meta property="og:image" content="assets/social-preview.svg" />
+  <meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Trail App Microservices | Joshua Pinder" />
+  <meta name="twitter:description" content="Trail App ProfileService microservice project by Joshua Pinder using FastAPI, SQL Server, role-based access, and Docker deployment." />
+  <meta name="twitter:image" content="assets/social-preview.svg" />
+  <meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="theme-color" content="#081714" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="antialiased">
+<body>
 <header>
   <div class="container nav">
     <div class="brand"><span>Joshua Pinder</span><span class="badge">Project</span></div>
@@ -22,10 +35,10 @@
 <main class="container">
   <div class="card pad">
     <h1>Trail App Microservices</h1>
-    <p class="muted">COMP2001 • Python + SQL • Microservice architecture</p>
+    <p class="muted">COMP2001 • ProfileService microservice • Python FastAPI + SQL Server + Docker deployment</p>
 
     <div class="stack" style="margin-top: 10px;">
-      <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Service boundaries</span><span class="chip">DB-per-service</span>
+      <span class="chip">Python FastAPI</span><span class="chip">SQL Server + pyodbc</span><span class="chip">3NF schema design</span><span class="chip">Role-based access control</span><span class="chip">Docker containerisation</span>
     </div>
 
     <div class="pillrow" style="margin-top: 14px;">
@@ -38,19 +51,20 @@
       <div class="card pad">
         <h2>Overview</h2>
         <p class="muted">
-          Implemented a set of interlinked microservices for a wellbeing trail application. Each service owned its own data model
-          and database to reduce coupling and improve maintainability.
+          I designed and implemented the ProfileService microservice for the wider Trail Application, including database design,
+          API endpoint implementation, authentication integration, and deployment. The service manages user profile data as an
+          independent domain while integrating with the wider microservice ecosystem.
         </p>
       </div>
     </div>
     <div class="col-6">
       <div class="card pad">
-        <h2>What I’d highlight</h2>
+        <h2>My contribution, decision, and outcome</h2>
         <ul class="muted">
-          <li>Service separation and responsibilities</li>
-          <li>API design decisions</li>
-          <li>SQL schema per service</li>
-          <li>Testing / evidence of communication between services</li>
+          <li><strong>Contribution:</strong> Built the ProfileService end to end using FastAPI, SQL Server, and pyodbc, including profile CRUD flows, role-aware endpoints, and supporting database view/trigger logic.</li>
+          <li><strong>Technical decision:</strong> Kept authentication in an external Authenticator API while handling local authorisation/roles inside ProfileService, reducing credential risk and keeping boundaries clear.</li>
+          <li><strong>Outcome/result:</strong> Verified all required functionality through Swagger UI testing, direct SQL validation, and containerised execution; published the service to Docker Hub as <code class="inline">joshua-pinder/profileservice-cw2:latest</code>.</li>
+          <li><strong>Reflection:</strong> Identified a profile-view join duplication limitation and documented production improvements (e.g., subqueries/materialised views).</li>
         </ul>
       </div>
     </div>

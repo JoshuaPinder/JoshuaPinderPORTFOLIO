@@ -4,10 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Restaurant Management App | Joshua Pinder</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Android restaurant management app project by Joshua Pinder featuring Java/XML implementation, role-based UX, and usability-driven iteration." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Restaurant Management App | Joshua Pinder" />
+  <meta property="og:description" content="Android restaurant management app project by Joshua Pinder featuring Java/XML implementation, role-based UX, and usability-driven iteration." />
+  <meta property="og:site_name" content="Joshua Pinder Portfolio" />
+  <meta property="og:image" content="assets/social-preview.svg" />
+  <meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Restaurant Management App | Joshua Pinder" />
+  <meta name="twitter:description" content="Android restaurant management app project by Joshua Pinder featuring Java/XML implementation, role-based UX, and usability-driven iteration." />
+  <meta name="twitter:image" content="assets/social-preview.svg" />
+  <meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="theme-color" content="#081714" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="antialiased">
+<body>
 <header>
   <div class="container nav">
     <div class="brand"><span>Joshua Pinder</span><span class="badge">Project</span></div>
@@ -22,11 +35,11 @@
 <main class="container">
   <div class="card pad">
     <h1>Restaurant Management Application</h1>
-    <p class="muted">COMP2000 • Android (Java) • Staff & Guest roles</p>
+    <p class="muted">COMP2000 • Android Studio (Java/XML) • Role-based restaurant operations app for staff and guests</p>
 
     <div class="stack" style="margin-top: 10px;">
-      <span class="chip">Java</span><span class="chip">Android</span><span class="chip">SQLite</span>
-      <span class="chip">REST API</span><span class="chip">Notifications</span>
+      <span class="chip">Java + XML layouts</span><span class="chip">Material Design components</span><span class="chip">Role-based UX</span>
+      <span class="chip">SQLite offline persistence</span><span class="chip">RecyclerView workflows</span>
     </div>
 
     <div class="pillrow" style="margin-top: 14px;">
@@ -39,20 +52,20 @@
       <div class="card pad">
         <h2>Overview</h2>
         <p class="muted">
-          Built a mobile app for restaurant operations with two user types: staff can manage menu items and reservations;
-          guests can browse the menu and book tables. Data is persisted locally (SQLite) with secure API integration.
+          I designed, evaluated, and implemented a role-based restaurant app where staff manage menu/reservations and guests
+          browse the menu, then make, edit, or cancel bookings. The final high-fidelity build was delivered in Android Studio
+          using Java and XML layouts, with iterative UI improvements informed by usability testing.
         </p>
       </div>
     </div>
     <div class="col-6">
       <div class="card pad">
-        <h2>Key features</h2>
+        <h2>My contribution, decision, and outcome</h2>
         <ul class="muted">
-          <li>Login for staff and guests</li>
-          <li>Local persistence using SQLite</li>
-          <li>REST API integration for user access</li>
-          <li>Notifications for reservation changes</li>
-          <li>Notification preferences in settings</li>
+          <li><strong>Contribution:</strong> Built the Android UI and role-based user flows end to end, including guest reservation actions, staff menu/reservation management, and notification preferences.</li>
+          <li><strong>Technical decision:</strong> Used explicit role-based access control in the interface so staff and guests only see actions relevant to their responsibilities.</li>
+          <li><strong>Outcome/result:</strong> In summative usability evaluation, both test participants completed the majority of tasks successfully; findings were implemented in the final build through clearer reservation actions, stronger confirmation dialogs, and improved notification-setting clarity.</li>
+          <li><strong>Implementation stack:</strong> Java + XML with Material Design components, ConstraintLayout for responsive screens, RecyclerView for efficient menu/reservation lists, and SQLite for offline data access.</li>
         </ul>
       </div>
     </div>

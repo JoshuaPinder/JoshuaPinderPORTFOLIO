@@ -4,10 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wyttle | Joshua Pinder</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Wyttle project case study by Joshua Pinder covering full-stack mobile delivery, backend leadership, and live App Store/Google Play release details." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Wyttle | Joshua Pinder" />
+  <meta property="og:description" content="Wyttle project case study by Joshua Pinder covering full-stack mobile delivery, backend leadership, and live App Store/Google Play release details." />
+  <meta property="og:site_name" content="Joshua Pinder Portfolio" />
+  <meta property="og:image" content="assets/social-preview.svg" />
+  <meta property="og:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Wyttle | Joshua Pinder" />
+  <meta name="twitter:description" content="Wyttle project case study by Joshua Pinder covering full-stack mobile delivery, backend leadership, and live App Store/Google Play release details." />
+  <meta name="twitter:image" content="assets/social-preview.svg" />
+  <meta name="twitter:image:alt" content="Joshua Pinder portfolio cover image" />
+  <meta name="theme-color" content="#081714" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="antialiased">
+<body>
 <header>
   <div class="container nav">
     <div class="brand">
@@ -25,48 +38,67 @@
 <main class="container">
   <div class="card pad">
     <h1>Wyttle</h1>
-    <p class="muted">Group project • Full-stack mobile mentoring + peer matching platform</p>
+    <p class="muted">Cross-platform mentoring + peer-matching app (now live on App Store + Google Play)</p>
 
     <div class="stack" style="margin-top: 10px;">
-      <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Expo</span>
-      <span class="chip">Auth</span><span class="chip">Database</span><span class="chip">Messaging</span>
+      <span class="chip">React Native (Expo)</span><span class="chip">TypeScript</span><span class="chip">Role-based auth</span>
+      <span class="chip">Matching workflows</span><span class="chip">Messaging + notifications</span><span class="chip">Supabase integration</span>
+    </div>
+    <div class="pillrow" style="margin-top: 14px;">
+      <a class="button primary" href="https://apps.apple.com/gb/app/wyttle/id6760225008" target="_blank" rel="noreferrer">View on App Store</a>
+      <a class="button" href="https://play.google.com/store/apps/details?id=com.wyttle.wyttleapp&hl=en_GB" target="_blank" rel="noreferrer">View on Google Play</a>
     </div>
 
     <div style="margin-top: 16px;" class="notice">
-      Replace this page with your real Wyttle details once you’re ready (screenshots, your responsibilities, and key features).
+      Team size: 3 • Timeframe: November 2025 – March 2026 • Role: Project Manager + Backend Lead
+      NDA restrictions are now lifted, so this page includes the engineering work I directly contributed.
     </div>
   </div>
 
   <div class="sectionhead">
-    <h2>What it does</h2>
+    <h2>Product & engineering detail</h2>
   </div>
 
   <div class="grid">
     <div class="col-8">
       <div class="card pad">
         <p class="muted">
-          Wyttle is a cross-platform mobile app designed to connect peers-to-peers and peers-to-mentors.
-          It supports discovery, matching, secure communication, and token-based interactions to encourage engagement.
+          Wyttle connects peers-to-peers and peers-to-mentors through guided discovery, matching, and secure in-app communication.
+          I helped deliver the core interaction systems and backend-connected user journeys that support ongoing expansion into university communities.
         </p>
 
-        <h3 style="margin-top: 16px;">Key features</h3>
+        <h3 style="margin-top: 16px;">Stack breakdown</h3>
         <ul class="muted">
-          <li>Role-based experience (mentor vs mentee)</li>
-          <li>Discovery and matching flows</li>
-          <li>Messaging with notifications</li>
-          <li>Token-based incentives and feedback loops</li>
+          <li><strong>Frontend:</strong> React Native + Expo with TypeScript for role-specific screens and reusable components.</li>
+          <li><strong>Backend/data:</strong> Supabase-backed authentication and data workflows for user identity, matching, and messaging.</li>
+          <li><strong>Application logic:</strong> Swipe discovery and match rules connected to real user profiles and role constraints.</li>
+          <li><strong>Communication:</strong> Message-thread flows with room creation and message lifecycle actions.</li>
+        </ul>
+
+        <h3 style="margin-top: 16px;">Features I helped ship</h3>
+        <ul class="muted">
+          <li>Sign-in and sign-up flows, including sign-in with Apple, Google, and LinkedIn.</li>
+          <li>Discovery stack for meeting members with swipe mechanics and match logic.</li>
+          <li>Message threads with room creation and support for send/edit/delete message actions.</li>
+          <li>Admin panel for approving join requests, moderating users, and setting mentor prices.</li>
         </ul>
       </div>
     </div>
 
     <div class="col-4">
       <div class="card pad">
-        <h3>Your role</h3>
+        <h3>My contribution</h3>
         <p class="muted">
-          Backend Lead & Project Manager — architecture decisions, database design, integration planning, and delivery coordination.
+          I worked as Project Manager + Backend Lead, owning backend planning and integration delivery while helping shape product-critical flows end to end.
         </p>
-        <h3 style="margin-top: 14px;">Next add</h3>
-        <p class="muted">Screenshots, system diagram, and what you personally built.</p>
+        <h3 style="margin-top: 16px;">Technical challenge</h3>
+        <p class="muted">
+          A key challenge was learning Supabase quickly and integrating it properly with the app’s authentication, data access patterns, and user interaction flows.
+        </p>
+        <h3 style="margin-top: 16px;">Outcome</h3>
+        <p class="muted">
+          Wyttle currently has 200 members, with daily growth as we continue targeted rollout across university audiences.
+        </p>
       </div>
     </div>
   </div>
