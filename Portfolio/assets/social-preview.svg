@@ -30,28 +30,28 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#g1)"/>
   <rect width="1200" height="630" fill="url(#g2)"/>
-  <g opacity=".18" stroke="#8fb0aa">
+  <g opacity=".18" stroke="#86b19b">
     <path d="M0 480 C180 430 340 520 520 470 C720 410 900 500 1200 430" fill="none" stroke-width="2"/>
     <path d="M0 520 C170 470 360 560 550 510 C760 450 930 540 1200 470" fill="none" stroke-width="2"/>
   </g>
   <g transform="translate(92 114)">
-    <text x="0" y="0" fill="#d6dfef" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="33" font-weight="600" letter-spacing="1.8">
+    <text x="0" y="0" fill="#e7dcfb" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="33" font-weight="600" letter-spacing="1.8">
       JOSHUA PINDER
     </text>
-    <text x="0" y="90" fill="#f0f5ff" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="84" font-weight="800">
+    <text x="0" y="90" fill="#f6edff" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="84" font-weight="800">
       Computing Portfolio
     </text>
     <rect x="0" y="126" width="620" height="6" rx="3" fill="url(#line)"/>
-    <text x="0" y="202" fill="#b4bfcc" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="38" font-weight="500">
+    <text x="0" y="202" fill="#c9b8df" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="38" font-weight="500">
       Backend development · Full-stack mobile delivery
     </text>
-    <text x="0" y="274" fill="#9fb0be" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="30" font-weight="500">
+    <text x="0" y="274" fill="#b6aac8" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="30" font-weight="500">
       Shipped projects, practical systems, and product-focused engineering
     </text>
   </g>
   <g transform="translate(905 454)">
-    <rect x="0" y="0" width="210" height="92" rx="16" fill="rgba(13,27,24,.72)" stroke="rgba(123,151,145,.58)"/>
-    <text x="22" y="38" fill="#d8e4ef" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="26" font-weight="700">Open to</text>
+    <rect x="0" y="0" width="210" height="92" rx="16" fill="rgba(13,27,24,.72)" stroke="rgba(102,158,126,.62)"/>
+    <text x="22" y="38" fill="#f0e5ff" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="26" font-weight="700">Open to</text>
     <text x="22" y="69" fill="#9de7cf" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="24" font-weight="700">engineering roles</text>
   </g>
   <circle cx="1082" cy="108" r="44" fill="rgba(124,58,237,.22)" filter="url(#softGlow)"/>
